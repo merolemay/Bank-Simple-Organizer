@@ -1,5 +1,7 @@
 package sortmethods;
 
+import BTS.*;
+
 public  class SortingMetdos {
 	
 	/** Selection  sort generic implementation
@@ -22,7 +24,20 @@ public  class SortingMetdos {
 	            E iSwap = list[iSmallest];
 	            list[iSmallest] = list[i];
 	            list[i] = iSwap;
+	     
 	        }
+	}
+	
+	public static <E extends Comparable<E>> void mergeSort(E[] list) {
+		//Alex acabar!!
+		
+	}
+	
+	public static <E extends Comparable<E>> void Tree(E[] list) {
+		BTS<E> tree = new BTS<E>();
+		for(int i=0;i<list.length;i++) {
+			tree.addNode(list[i]);
+		}
 	}
 	
 	
