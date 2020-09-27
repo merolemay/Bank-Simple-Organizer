@@ -31,6 +31,13 @@ public  class SortingMetdos {
 	public static <E extends Comparable<E>> void mergeSort(E[] list) {
 		//Alex acabar!!
 		
+		if  (list.length <= 1) {
+			
+			throw new IllegalArgumentException("There is only 1 account or is null");
+			
+			
+		}
+		
 	}
 	
 	public static <E extends Comparable<E>> void Tree(E[] list) {
