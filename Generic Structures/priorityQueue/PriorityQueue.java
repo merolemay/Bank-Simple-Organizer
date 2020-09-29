@@ -18,6 +18,7 @@ public class PriorityQueue <E> {
 	
     @SuppressWarnings("unchecked")
 	public E Head() throws NoSuchElementException  {
+    	
         if (isEmpty()) {
             throw new NoSuchElementException();
         } else {
