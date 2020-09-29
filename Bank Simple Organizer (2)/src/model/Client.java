@@ -8,11 +8,10 @@ public class Client {
 	
 	private String name;
 	private int cc;
-	private int bankAcountNumber;
 	private DebitCard debitCard;
 	private CreditCard crediCard;
-	private Stack<Transactions> transactions;
-	private Date registerDate;
+	private Stack<Transactions> transactionsStack;
+	private Transactions tr;
 	
 	public Client() {
 		
@@ -24,14 +23,13 @@ public class Client {
 	 * @param bankAcountNumber : Number which the account of the client is in the data base
 	 * @param registerDate : The date in which the Client was registered into the bank
 	 */
-	public Client(String name, int cc, int bankAcountNumber,Date registerDate) {
+	public Client(String name, int cc,Date registerDate) {
 		this.name = name;
 		this.cc = cc;
-		this.bankAcountNumber = bankAcountNumber;
 		this.debitCard = null;
 		this.crediCard = null;
-		transactions = new Stack<Transactions>();
-		this.registerDate= registerDate;
+		transactionsStack = new Stack<Transactions>();
+		tr=null;
 	}
 
 	/**
@@ -60,20 +58,6 @@ public class Client {
 	 */
 	public void setCc(int cc) {
 		this.cc = cc;
-	}
-
-	/**
-	 * @return the bankAcountNumber
-	 */
-	public int getBankAcountNumber() {
-		return bankAcountNumber;
-	}
-
-	/**
-	 * @param bankAcountNumber the bankAcountNumber to set
-	 */
-	public void setBankAcountNumber(int bankAcountNumber) {
-		this.bankAcountNumber = bankAcountNumber;
 	}
 
 	/**
@@ -108,31 +92,12 @@ public class Client {
 	 * @return the transactions
 	 */
 	public Stack<Transactions> getTransactions() {
-		return transactions;
-	}
-
-	/**
-	 * @param transactions the transactions to set
-	 */
-	public void setTransactions(Stack<Transactions> transactions) {
-		this.transactions = transactions;
-	}
-
-	/**
-	 * @return the registerDate
-	 */
-	public Date getRegisterDate() {
-		return registerDate;
-	}
-
-	/**
-	 * @param registerDate the registerDate to set
-	 */
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
+		return transactionsStack;
 	}
 	
-	
+	public void saveTransaction(Client c, int i) {
+		c.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));
+	}
 	
 
 }
