@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
@@ -131,6 +132,57 @@ public class BankOrganizerUiController implements Initializable {
 
     @FXML
     void loadPriorityQueue(ActionEvent event) {
+
+    }
+
+    @FXML
+    private Label clientNameInfo;
+
+    @FXML
+    private Label clientIDInfo;
+
+    @FXML
+    private Label accountNumber;
+
+    @FXML
+    private Label cardDate;
+
+    @FXML
+    private Label cardDate1;
+
+    @FXML
+    private TextField amountToPay;
+
+    @FXML
+    private Label deudaSpace;
+
+    @FXML
+    void loadBackInfoClient(ActionEvent event) {
+
+    }
+
+    @FXML
+    void loadCancelAccount(ActionEvent event) {
+
+    }
+
+    @FXML
+    void loadConsign(ActionEvent event) {
+
+    }
+
+    @FXML
+    void loadPayCard(ActionEvent event) {
+
+    }
+
+    @FXML
+    void loadRetire(ActionEvent event) {
+
+    }
+
+    @FXML
+    void loadUndo(ActionEvent event) {
 
     }
 

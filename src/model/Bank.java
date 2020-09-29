@@ -23,7 +23,7 @@ public class Bank {
 	 */
 	public Bank() {
 		bank = new HashTable<Integer,Client>(12);
-		///////clientQueue;
+		////clientQueue
 	}
 	
 	/** Searches a client in the Bank Based on his cc.
