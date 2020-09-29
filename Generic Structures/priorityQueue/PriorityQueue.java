@@ -1,86 +1,84 @@
 package priorityQueue;
 
-import java.util.Comparator;
+import java.util.NoSuchElementException;
 
-import Stack.Stack;
-
-// Inspired in Jatin Sharma 
 public class PriorityQueue <E> {
 	
-	public static final int MAX_SIZE=12;
 	
+	private final Object[] table;
+	private final int capacity;
 	private int size;
 	
-	
-	private Object k[];
-	
-	
-	public PriorityQueue() {	 
-		k = new Object[MAX_SIZE];
+	public PriorityQueue(int size) {
+			table  = new Object[size];
+	        capacity = size;
+	        this.size = -1;
 	}
 	
 	
-	public PriorityQueue(int maxSize) {	 
-		k = new Object[maxSize];
+    @SuppressWarnings("unchecked")
+	public E Head() throws NoSuchElementException  {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        } else {
+            return ((Node<E>) table[0]).getObj();
+        }
+    }
+    
+    
+    @SuppressWarnings("unchecked")
+	public E pop() throws NoSuchElementException  {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        } else {
+        	E aux = ((Node<E>) table[0]).getObj();
+        	 remove();
+            return aux;
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+	public void add(E obj,int priority) throws ArrayIndexOutOfBoundsException {
+    	
+    	size = size + 1;
+    	
+    		if(size>=capacity) {
+    			 size = size - 1;
+    	            throw new ArrayIndexOutOfBoundsException();
+    		} else {
+    			
+    			int i = size;
+    			
+    			 while (i > 0 && ((Node<E>) table[i - 1]).getPriority() < priority) {
+    				 table[i] = table[i - 1];
+    	                i = i - 1;
+    	            }
+    			 
+    			 table[i] = new Node<>(obj, priority);
+    			
+    		}
+    }
+    
+    /**
+     * Remove the highest priority item from the queue. Throw an exception if
+     * it's empty.
+     * @throws NullPointerException
+     */
+    public void remove() throws NullPointerException {
+        if (isEmpty()) {
+            throw new NullPointerException();
+        } else {
+            for (int i = 0; i < size; i++) {
+                table[i] = table[i + 1];
+            }
+            size = size - 1;
+        }
+    }
+    
+    
+	public boolean isEmpty() {
+		
+		return size < 0;
 	}
-	@SuppressWarnings("unchecked")
-	public E parent(int index) {
-		
-		return (E) k[(index-1)/2];
-	}
-	
-	 private Object left(int i)
-	    {
-		 Object n =  k[2 * i + 1];
-	        return n;
-	    }
-
-	    private E right(int i)
-	    {
-	        return (E) k[2 * i + 2];
-	    }
-
-	
-	public void add() {}
-	
-	public void offer(E data) {
-		
-	}
-	
-	public E poll() {
-		
-		return null;
-		
-	}
-	
-	public E peek() {
-		
-		
-		return null;
-	}
-	
-	public boolean remove(E obj) {
-		
-		return false;
-	}
-	 public void replace (E e1, E e2) {
-		 offer (e2);
-		 remove(e1);
-	 }
-	 
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
 
