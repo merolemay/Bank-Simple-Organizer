@@ -57,6 +57,14 @@ public class Bank {
 		
 	}
 	
+	public void cancelAccount(int id) {
+		
+		bank.get(key);
+		
+		
+		
+	}
+	
 	/** Searches a client in the Bank Based on his cc.
 	 * @param cc : the key of search in the HashTable
 	 * @return Client if it was found or an exception if the client doesn't exist
