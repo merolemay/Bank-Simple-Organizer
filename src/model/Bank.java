@@ -90,7 +90,7 @@ public class Bank {
 	 * @param cc : the key of the client which transaction is going to be make
 	 * @param i : the amount of money that's going to be move into or out of the account.
 	 */
-	public void makeATransaton(int cc, int i) {
+	public void makeATransaction(int cc, int i) {
 		bank.get(cc).saveTransaction(bank.get(cc), i);
 	}
 

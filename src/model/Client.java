@@ -98,8 +98,18 @@ public class Client {
 		this.transactions = transactions;
 	}
 
-	public void saveTransaction(Client c, int i) {
-		c.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));
+	public boolean saveTransaction(Client c, double i) {
+		boolean s;
+		if(debitCard.changeAmount(i)) {
+			c.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));
+			s=true;
+		}else {
+			s=false;
+		}
+		return s;
+		
+		
+		
 	}
 	
 	public Date getRegisterDate() {

@@ -56,8 +56,31 @@ public class DebitCard {
 		this.number = number;
 	}
 	
-	
-	
-	
+	public boolean payWith (double am) {
+		
+		
+		if (am <= amount ) {
+			
+			amount= amount -  am;
+			
+					
+			return true;
+			
+		}else {
+			return false;
+		}
+		
+		
+	}
+	public boolean changeAmount(double money) {
+		amount = amount+money;
+		boolean b;
+		if(amount<0) {
+			b = false;
+		}else {
+			b = true;
+		}
+		return b;
+	}
 	
 }
