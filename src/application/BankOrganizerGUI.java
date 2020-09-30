@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import model.Bank;
 import model.Client;
 
-public class BankOrganizerGUI{
+public class BankOrganizerGUI implements Initializable{
 	
 	@FXML
     private TableView<?> txBaseTV;

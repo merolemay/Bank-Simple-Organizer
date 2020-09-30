@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import model.Bank;
-import model.Registry;
-import ui.UsserGUI;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -27,20 +25,17 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-		
-			Parent loader = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
 			
-			
-			((FXMLLoader) loader).setController(bankGui);
-			Parent root = loader.load();
-
-			scene = new Scene(root);
-			stage.setScene(scene);
-			stage.setTitle("Project Bilet");
-			usserGUI.loadUserWindow(null);
-			stage.show();
-			stage.sizeToScene();}
-	
+			try {
+				Parent loader = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+				Scene scene = new Scene(loader);
+				primaryStage.setTitle("Flight Organizer");
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+	}
 	
 	public static void main(String[] args) {
 		launch(args);

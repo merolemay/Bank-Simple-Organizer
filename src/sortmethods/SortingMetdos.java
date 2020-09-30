@@ -2,11 +2,8 @@ package sortmethods;
 
 import BTS.*;
 
-<<<<<<< HEAD
-public  class SortingMetdos {
-=======
 public  class SortingMetdos  {
->>>>>>> origin/Alejillus
+
 	
 	/** Selection  sort generic implementation
 	 * @param <E> : Generic use of the array
@@ -33,7 +30,7 @@ public  class SortingMetdos  {
 	}
 	
 	public <E extends Comparable<E>> void  mergeSort(E[] list,int start,int end) {
-<<<<<<< HEAD
+
 
         if  (list.length <= 1) {
 
@@ -52,7 +49,7 @@ public  class SortingMetdos  {
     }
 
 
-    public <E extends Comparable<E>> void merge(E[] list,int start, int middle, int end) {
+    public <E extends Comparable<E>> void mergeSorthMethod(E[] list,int start, int middle, int end) {
         E[] left  = (E[]) new Comparable[middle - start+1];
         E[] right = (E[]) new Comparable[end - middle];
 
@@ -92,21 +89,19 @@ public  class SortingMetdos  {
             rightI++;
             list[currentI] = right[rightI];
         }
-    }
-		
-	
-=======
+    
+
 		
 		if  (list.length <= 1) {
 			
 			throw new IllegalArgumentException("There is only 1 account or is null");
 				
 		}else {
-			int middle = list.length/2;
-			mergeSort(list,start,middle);
-			mergeSort(list,middle+1,end);
+			int m = list.length/2;
+			mergeSort(list,start,m);
+			mergeSort(list,m+1,end);
 			
-			merge(list,start,middle,end);
+			merge(list,start,m,end);
 			
 		}
 		
@@ -156,7 +151,6 @@ public  class SortingMetdos  {
 		}
 	}
   
->>>>>>> origin/Alejillus
 	
 	public static <E extends Comparable<E>> void Tree(E[] list) {
 		BTS<E> tree = new BTS<E>();
@@ -165,9 +159,5 @@ public  class SortingMetdos  {
 		}
 	}
 	
-<<<<<<< HEAD
 	
-=======
->>>>>>> origin/Alejillus
-
 }
