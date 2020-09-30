@@ -16,9 +16,9 @@
             <TableView fx:id="txBaseTV" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="tclName" prefWidth="75.0" text="Nombre" />
-                <TableColumn fx:id="tclID" prefWidth="101.0" text="Cedula" />
-                  <TableColumn fx:id="tclBankAccount" prefWidth="173.0" text="Balance" />
-                  <TableColumn fx:id="tclIncDate" prefWidth="250.0" text="Fecha de incorporación" />
+                <TableColumn fx:id="tclID" prefWidth="176.0" text="Cedula" />
+                  <TableColumn fx:id="tclBankAccount" prefWidth="172.0" text="Cuenta Bancaria" />
+                  <TableColumn fx:id="tclIncDate" prefWidth="176.0" text="Fecha de incorporación" />
               </columns>
             </TableView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

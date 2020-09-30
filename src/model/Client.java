@@ -11,7 +11,6 @@ public class Client {
 	private DebitCard debitCard;
 	private CreditCard crediCard;
 	private Stack<Transactions> transactions;
-	
 	public Client() {
 		
 	}
@@ -100,8 +99,9 @@ public class Client {
 		this.transactions = transactions;
 	}
 
-	
-	
+	public void saveTransaction(Client c, int i) {
+		c.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));
+	}
 	
 
 }
