@@ -38,11 +38,14 @@ class BankTest {
 	}
 	@Test
 	void testAddToClientQueue() {
-		septu3();
-		bank.addClientToQueue(bank.searchClient(912385123));
-		bank.addClientToQueue(bank.searchClient(1986091821));
-		bank.addClientToQueue(bank.searchClient(2123912351));
-	
+		
+		septu2();
+		Client c1 = new Client("Daniel Perez",1087212345);
+		Client c2 = new Client("Andres Peñalosa",1087652891);
+		bank.getClientQueue().enqueue(c1);
+		bank.getClientQueue().enqueue(c2);
+		
+		assertTrue(bank.getClientQueue().dequeue().equals(c2));
 		
 	}
 	

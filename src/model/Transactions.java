@@ -6,13 +6,15 @@ public class Transactions {
 
 	private Date date;
 	private String lastTransaction;
+	private double money;
 	
-	public Transactions(Date date, int n) {
+	public Transactions(Date date, double n) {
 		this.date=date;
+		money = n;
 		if(n<0) {
-			lastTransaction="The last transaction was a withdrawal of:"+n+"$";
+			lastTransaction="The last transaction was a withdrawal of:"+money+"$";
 		} else {
-			lastTransaction="The last transaction was a deposit of:"+n+"$";
+			lastTransaction="The last transaction was a deposit of:"+money+"$";
 		}
 	}
 	
@@ -23,4 +25,7 @@ public class Transactions {
 		return date;
 	}
 	
+	public double getMoney() {
+		return money;
+	}
 }

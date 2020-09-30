@@ -1,19 +1,19 @@
 package Queue;
 
-public class iNode<E> {
+public class Node<E> {
 	
 	private E data = null;
-	private iNode<E> previous = null;
-	private iNode <E>  next = null;
+	private Node<E> previous = null;
+	private Node <E>  next = null;
 	
 	
-	public iNode() {}
+	public Node() {}
 	
-	public iNode(E obj) {
+	public Node(E obj) {
 		this.data=obj;
 	}
 
-	public iNode(E data, iNode<E> next, iNode<E> previus) {
+	public Node(E data, Node<E> next, Node<E> previus) {
 		super();
 		this.data = data;
 		this.previous = previus;
@@ -28,19 +28,19 @@ public class iNode<E> {
 		data=obj;
 	}
 
-	public iNode<E> getPrevious() {
+	public Node<E> getPrevious() {
 		return previous;
 	}
 
-	public void setPrevious(iNode<E> previus) {
+	public void setPrevious(Node<E> previus) {
 		this.previous = previus;
 	}
 
-	public iNode<E> getNext() {
+	public Node<E> getNext() {
 		return next;
 	}
 
-	public void setNext(iNode<E> next) {
+	public void setNext(Node<E> next) {
 		this.next = next;
 	}
 	

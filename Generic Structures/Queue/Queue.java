@@ -2,26 +2,26 @@ package Queue;
 
 import java.util.NoSuchElementException;
 
-public class iQueue<E> {
+public class Queue<E> {
 	
-	private iNode<E> head = null;
-	private iNode<E> tail = null;
+	private Node<E> head = null;
+	private Node<E> tail = null;
 	private int queueSize=0;
 	
-	public iQueue() {}
+	public Queue() {}
 	
 	//Stars the queue with one element
-	public iQueue(E obj) {
-		head = new iNode<E>(obj);
+	public Queue(E obj) {
+		head = new Node<E>(obj);
 		queueSize =1;
 	}
 	
 	
 
-	public iQueue(E head, E tail){
+	public Queue(E head, E tail){
 		
-		this.head = new iNode<E>(head);
-		this.tail = new iNode<E>(tail);
+		this.head = new Node<E>(head);
+		this.tail = new Node<E>(tail);
 		this.head.setPrevious(this.tail);
 		this.tail.setNext(this.head);
 		
@@ -32,17 +32,17 @@ public class iQueue<E> {
 		
 		if (queueSize == 0){
 			
-			head = new iNode<E>(obj);
+			head = new Node<E>(obj);
 			
 		}
 		else if (queueSize == 1){
 			
-			tail = new iNode<E>(obj, head, null);
+			tail = new Node<E>(obj, head, null);
 			
 		} 
 		else {
 			
-			tail = new iNode<E>(obj, tail, null);
+			tail = new Node<E>(obj, tail, null);
 		}
 		
 		queueSize += 1;

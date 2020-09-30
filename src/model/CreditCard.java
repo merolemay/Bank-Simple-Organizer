@@ -17,6 +17,11 @@ public class CreditCard {
 		this.number = number;
 		this.limit = limit;
 	}
+	
+	public void payCard() {
+		balance =0;
+	}
+	
 
 	public Date getCreationDate() {
 		return creationDate;
