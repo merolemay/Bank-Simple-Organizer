@@ -72,9 +72,5 @@ public class HashTable<K, V> implements Map<K,V> {
 		return null;
 	}
 	
-	public LinkedList<HashNode<K,V>>[] getArray(){
-		return table;
-	}
-	
 
 }
