@@ -109,6 +109,8 @@ public class Client {
 		return s;
 		
 		
+<<<<<<< Updated upstream
+=======
 	
 	}
 	
@@ -127,6 +129,7 @@ public class Client {
 			s=true;
 		}
 		return s;
+>>>>>>> Stashed changes
 		
 	}
 	

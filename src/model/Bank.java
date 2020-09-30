@@ -19,7 +19,7 @@ import priorityQueue.PriorityQueue;
 public class Bank {
 	
 	private HashTable<Integer,Client> bank;
-
+	private SortingMetdo
 	
 	private Queue<Client> clientQueue;
 	private PriorityQueue<Client> prioriQueue;
@@ -116,6 +116,10 @@ public class Bank {
 
 	public PriorityQueue<Client> getPrioriQueue() {
 		return prioriQueue;
+	}
+	
+	public void selectionSort() {
+		bank.getArray()
 	}
 	
 	
