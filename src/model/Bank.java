@@ -29,49 +29,32 @@ public class Bank {
 	 * @param admin: The administrator of the bank.
 	 */
 	public Bank() {
-
-		bank = new HashTable<Integer,Client>(50);
+		bank = new HashTable<Integer,Client>(19);
 		clientQueue = new iQueue<Client>();
-		prioriQueue = new PriorityQueue<Client>(12);
-		
-		
+		prioriQueue = new PriorityQueue<Client>(12);	
 	}
 	
-	public void addToClientQueue(Client c) {
+	
+	
+	/** Registers a Client in the bank data base (HashTable).
+	 * @param c : the client that is going to be inserted.
+	 */
+	public void registerClient(Client c) {
+		bank.put(c.getCc(), c);
+	}
+	
+	
+	public void addClientToQueue(Client c) {
 		
 		if(clientQueue.size() < 12) {
 		
 		clientQueue.enqueue(c);
 		
 		}
-		
-		
-		
-		
-		
 	}
 	
-	public void addToPriorityQueue(Client c, int prio) {
-		
-	
-			
+	public void addToPriorityQueue(Client c, int prio) {	
 			prioriQueue.add(c,prio);
-			
-		
-		
-		
-		
-	}
-	
-	public void cancelAccount(int id) {
-		
-		bank.get(id);
-		
-		
-		
-
-		bank = new HashTable<Integer,Client>(12);
-
 	}
 	
 	/** Searches a client in the Bank Based on his cc.

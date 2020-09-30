@@ -24,10 +24,8 @@ public class Main extends Application {
 	
 	
 	public Main() {
-		
 		if (myBank == null) myBank = new Bank();
 		bankGUI = new BankOrganizerGUI(myBank);
-		
 	}
 	
 	@Override
