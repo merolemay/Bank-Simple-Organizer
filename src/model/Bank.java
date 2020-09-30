@@ -45,13 +45,13 @@ public class Bank {
 		
 	}
 	
-	public void addToPriorityQueue(Client c) {
+	public void addToPriorityQueue(Client c, int prio) {
 		
-		if(clientQueue.size() < 12) {
+	
 			
-			clientQueue.enqueue(c);
+			prioriQueue.add(c,prio);
 			
-			}
+		
 		
 		
 		
