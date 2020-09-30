@@ -73,4 +73,24 @@ public class Bank {
 		return bank.remove(cc);
 	}
 	
+	
+	/** Undoes the last transaction of the client with entered cc.
+	 * @param cc
+	 * @return : a message with the last transaction
+	 * 
+	 * example: The last transaction was a withdraw of -99,99$.
+	 */
+	public String undo(int cc) {	
+		Transactions rs = bank.get(cc).getTransactions().pop();
+		return rs.getLastTransaction();
+	}
+	
+	/** Makes a new transaction 
+	 * @param cc : the key of the client which transaction is going to be make
+	 * @param i : the amount of money that's going to be move into or out of the account.
+	 */
+	public void makeATransaton(int cc, int i) {
+		bank.get(cc).saveTransaction(bank.get(cc), i);
+	}
+	
 }
