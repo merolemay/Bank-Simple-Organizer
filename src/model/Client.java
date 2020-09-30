@@ -12,9 +12,6 @@ public class Client {
 	private CreditCard crediCard;
 	private Stack<Transactions> transactions;
 	private Date registerDate;
-	public Client() {
-		
-	}
 
 	/** Constructor of the Client class using the basic names to register a Client into the bank following the next instances
 	 * @param name : Name of the Client.
