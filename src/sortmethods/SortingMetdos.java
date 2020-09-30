@@ -48,6 +48,67 @@ public  class SortingMetdos  {
 
     }
 
+
+    public <E extends Comparable<E>> void mergeSorthMethod(E[] list,int start, int middle, int end) {
+        E[] left  = (E[]) new Comparable[middle - start+1];
+        E[] right = (E[]) new Comparable[end - middle];
+
+        for (int i = 0; i < left.length; ++i)
+            left[i] = list[start+i];
+
+        for (int i = 0; i < right.length; ++i)
+            right[i] = list[middle + i+1];
+
+        int leftI= 0;
+        int rightI = 0;
+        int currentI = 0;
+
+        while (leftI < left.length && rightI < right.length)
+        {
+            if (( left[leftI]).compareTo( right[rightI]) <= 0)
+            {
+                list[currentI] = left[leftI];
+                leftI++;
+            }
+            else
+            {
+                list[currentI] = right[rightI];
+                rightI++;
+            }
+            currentI++;
+        }
+
+        while (leftI < left.length) {
+            currentI++;
+            leftI++;
+            list[currentI] = left[leftI];
+        }
+
+        while (rightI < right.length) {
+            currentI++;
+            rightI++;
+            list[currentI] = right[rightI];
+        }
+    
+
+		
+		if  (list.length <= 1) {
+			
+			throw new IllegalArgumentException("There is only 1 account or is null");
+				
+		}else {
+			int m = list.length/2;
+			mergeSort(list,start,m);
+			mergeSort(list,m+1,end);
+			
+			merge(list,start,m,end);
+			
+		}
+		
+		
+	}
+	
+
 	public <E extends Comparable<E>> void merge(E[] list,int start, int middle, int end) {
 		E[] left  = (E[]) new Comparable[middle - start+1];
 		E[] right = (E[]) new Comparable[end - middle];

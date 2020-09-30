@@ -109,7 +109,7 @@ public class Client {
 		return s;
 		
 		
-		
+	
 	}
 	
 	public boolean payCreditCard(Client c, double i,boolean t) {

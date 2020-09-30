@@ -75,4 +75,7 @@ public class Queue<E> {
 		return queueSize;
 	}
 	
+	public boolean isEmpty() {
+		return queueSize==0;
+	}
 }
