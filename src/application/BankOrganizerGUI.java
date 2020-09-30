@@ -1,16 +1,20 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import model.Bank;
 import model.Client;
 
@@ -30,6 +34,9 @@ public class BankOrganizerGUI implements Initializable{
 
     @FXML
     private TableColumn<?, ?> tclIncDate;
+    
+    @FXML
+	private BorderPane mainPane;
     
     private Bank myBank;
     
@@ -113,7 +120,14 @@ public class BankOrganizerGUI implements Initializable{
     }
 
     @FXML
-    void loadStartWindowFP(ActionEvent event) {
+    void loadStartWindowFP(ActionEvent event) throws Exception {
+    	
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TurnoCliente.fxml"));
+		fxmlLoader.setController(this);
+		Parent registry = fxmlLoader.load();
+
+		mainPane.getChildren().clear();
+		mainPane.setCenter(registry);
 
     }
     @FXML
