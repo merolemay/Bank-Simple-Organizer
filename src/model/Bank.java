@@ -1,5 +1,9 @@
 package model;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import HashTable.HashTable;
 import Queue.iQueue;
 import priorityQueue.PriorityQueue;
@@ -91,6 +95,12 @@ public class Bank {
 	 */
 	public void makeATransaton(int cc, int i) {
 		bank.get(cc).saveTransaction(bank.get(cc), i);
+	}
+	
+	public String dateToString(Date date) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+		String strDate = dateFormat.format(date);  
+		return strDate;
 	}
 	
 }

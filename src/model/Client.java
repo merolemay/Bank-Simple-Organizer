@@ -11,6 +11,7 @@ public class Client {
 	private DebitCard debitCard;
 	private CreditCard crediCard;
 	private Stack<Transactions> transactions;
+	private Date registerDate;
 	public Client() {
 		
 	}
@@ -21,12 +22,13 @@ public class Client {
 	 * @param bankAcountNumber : Number which the account of the client is in the data base
 	 * @param registerDate : The date in which the Client was registered into the bank
 	 */
-	public Client(String name, int cc,Date registerDate) {
+	public Client(String name, int cc) {
 		this.name = name;
 		this.cc = cc;
 		this.debitCard = null;
 		this.crediCard = null;
 		transactions = new Stack<Transactions>();
+		registerDate = new Date(System.currentTimeMillis());
 	}
 
 	/**
@@ -103,5 +105,7 @@ public class Client {
 		c.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));
 	}
 	
-
+	public Date getRegisterDate() {
+		return registerDate;
+	}
 }
