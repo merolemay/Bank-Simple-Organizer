@@ -9,7 +9,7 @@ public class Client {
 	private String name;
 	private int cc;
 	private DebitCard debitCard;
-	private CreditCard crediCard;
+	private CreditCard creditCard;
 	private Stack<Transactions> transactions;
 	private Date registerDate;
 
@@ -23,7 +23,7 @@ public class Client {
 		this.name = name;
 		this.cc = cc;
 		this.debitCard = null;
-		this.crediCard = null;
+		this.creditCard = null;
 		transactions = new Stack<Transactions>();
 		registerDate = new Date(System.currentTimeMillis());
 	}
@@ -74,14 +74,14 @@ public class Client {
 	 * @return the crediCard
 	 */
 	public CreditCard getCrediCard() {
-		return crediCard;
+		return creditCard;
 	}
 
 	/**
 	 * @param crediCard the crediCard to set
 	 */
 	public void setCrediCard(CreditCard crediCard) {
-		this.crediCard = crediCard;
+		this.creditCard = crediCard;
 	}
 
 	/**
@@ -109,6 +109,27 @@ public class Client {
 		return s;
 		
 		
+<<<<<<< Updated upstream
+=======
+	
+	}
+	
+	public boolean payCreditCard(Client c, double i,boolean t) {
+
+		boolean s=false;
+		if(t) {
+			if(debitCard.payWith(i)) {
+				creditCard.payCard();
+				c.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));
+				s=true;
+			}
+		}else {
+			creditCard.payCard();
+			c.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));
+			s=true;
+		}
+		return s;
+>>>>>>> Stashed changes
 		
 	}
 	

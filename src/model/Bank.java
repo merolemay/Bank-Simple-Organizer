@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import HashTable.HashTable;
-import Queue.iQueue;
+import Queue.Queue;
 import priorityQueue.PriorityQueue;
 
 /**This is the Main Class of the Bank Simply Organizer Project 
@@ -18,11 +18,11 @@ import priorityQueue.PriorityQueue;
  */
 public class Bank {
 	
-	HashTable<Integer,Client> bank;
-
+	private HashTable<Integer,Client> bank;
+	private SortingMetdo
 	
-	iQueue<Client> clientQueue;
-	PriorityQueue<Client> prioriQueue;
+	private Queue<Client> clientQueue;
+	private PriorityQueue<Client> prioriQueue;
 
 	/** The constructor of the Class bank which starts with a designate administrator
 	 *  which takes control of the .
@@ -30,7 +30,7 @@ public class Bank {
 	 */
 	public Bank() {
 		bank = new HashTable<Integer,Client>(19);
-		clientQueue = new iQueue<Client>();
+		clientQueue = new Queue<Client>();
 		prioriQueue = new PriorityQueue<Client>(12);	
 	}
 	
@@ -99,5 +99,28 @@ public class Bank {
 		String strDate = dateFormat.format(date);  
 		return strDate;
 	}
+
+
+
+	public HashTable<Integer, Client> getBank() {
+		return bank;
+	}
+
+
+
+	public Queue<Client> getClientQueue() {
+		return clientQueue;
+	}
+
+
+
+	public PriorityQueue<Client> getPrioriQueue() {
+		return prioriQueue;
+	}
+	
+	public void selectionSort() {
+		bank.getArray()
+	}
+	
 	
 }
