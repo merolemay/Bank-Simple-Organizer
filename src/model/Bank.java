@@ -19,15 +19,19 @@ import priorityQueue.PriorityQueue;
 public class Bank {
 	
 	HashTable<Integer,Client> bank;
+<<<<<<< HEAD
 	
 	iQueue<Client> clientQueue;
 	PriorityQueue<Client> prioriQueue;
+=======
+>>>>>>> origin/Alejillus
 	
 	/** The constructor of the Class bank which starts with a designate administrator
 	 *  which takes control of the .
 	 * @param admin: The administrator of the bank.
 	 */
 	public Bank() {
+<<<<<<< HEAD
 		bank = new HashTable<Integer,Client>(50);
 		clientQueue = new iQueue<Client>();
 		prioriQueue = new PriorityQueue<Client>(12);
@@ -49,16 +53,27 @@ public class Bank {
 		
 	}
 	
-	public void addToPriorityQueue(Client c) {
+	public void addToPriorityQueue(Client c, int prio) {
 		
-		if(clientQueue.size() < 12) {
+	
 			
-			clientQueue.enqueue(c);
+			prioriQueue.add(c,prio);
 			
-			}
 		
 		
 		
+		
+	}
+	
+	public void cancelAccount(int id) {
+		
+		bank.get(key);
+		
+		
+		
+=======
+		bank = new HashTable<Integer,Client>(12);
+>>>>>>> origin/Alejillus
 	}
 	
 	/** Searches a client in the Bank Based on his cc.
@@ -76,6 +91,7 @@ public class Bank {
 	public Client cancelAcount(Integer cc) {
 		return bank.remove(cc);
 	}
+<<<<<<< HEAD
 	
 	
 	/** Undoes the last transaction of the client with entered cc.
@@ -96,6 +112,8 @@ public class Bank {
 	public void makeATransaton(int cc, int i) {
 		bank.get(cc).saveTransaction(bank.get(cc), i);
 	}
+=======
+>>>>>>> origin/Alejillus
 	
 	public String dateToString(Date date) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
