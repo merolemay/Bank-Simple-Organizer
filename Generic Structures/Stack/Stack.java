@@ -1,9 +1,14 @@
 package Stack;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class Stack<E> implements iStack<E>{
+public class Stack<E> implements iStack<E>, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LinkedList<E> stack = null;
 	
 	//Empty stack

@@ -15,21 +15,22 @@
             <Label text="Base de datos" />
             <TableView fx:id="txBaseTV" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="tclName" prefWidth="75.0" text="Nombre" />
-                <TableColumn fx:id="tclID" prefWidth="176.0" text="Cedula" />
-                  <TableColumn fx:id="tclBankAccount" prefWidth="172.0" text="Cuenta Bancaria" />
-                  <TableColumn fx:id="tclIncDate" prefWidth="176.0" text="Fecha de incorporación" />
+                <TableColumn fx:id="tclName" prefWidth="75.0" sortType="DESCENDING" text="Nombre" />
+                <TableColumn fx:id="tclID" prefWidth="176.0" sortType="DESCENDING" text="Cedula" />
+                  <TableColumn fx:id="tclAmount" prefWidth="172.0" sortType="DESCENDING" text="Monto" />
+                  <TableColumn fx:id="tclIncDate" prefWidth="176.0" sortType="DESCENDING" text="Fecha de incorporación" />
               </columns>
             </TableView>
+            <Label text="Ordenar por :" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#loadSortByName" prefHeight="25.0" prefWidth="86.0" text="Nombre" />
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadSortIByID" text="Cedula" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadSortByBankAcc" text="Cuenta Bancaria" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadSortByAmount" text="Monto" />
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadSortByIncDate" text="Fecha de incorporación" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#loadStartWindow" text="Volver" />
+            <Button mnemonicParsing="false" onAction="#loadStartWindowBD" text="Volver" />
          </children>
       </VBox>
    </center>

@@ -1,9 +1,14 @@
 package Queue;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class Queue<E> {
+public class Queue<E> implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Node<E> head = null;
 	private Node<E> tail = null;
 	private int queueSize=0;
@@ -76,6 +81,11 @@ public class Queue<E> {
 	}
 	
 	public boolean isEmpty() {
-		return queueSize==0;
+		if(head==null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
+	
 }

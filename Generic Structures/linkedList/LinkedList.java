@@ -1,9 +1,14 @@
 package linkedList;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class LinkedList<E> {
+public class LinkedList<E> implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Node<E> top=null;
 	
 	public LinkedList() {}

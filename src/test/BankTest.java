@@ -1,41 +1,46 @@
-
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.sql.Date;
 
 import org.junit.jupiter.api.Test;
 
 import model.Bank;
 import model.Client;
+import model.DebitCard;
 
 class BankTest {
 
 	Bank bank;
-	void setUp1(){
+	
+	void  setUp1(){
 		bank = new Bank();
-		bank.registerClient(new Client("Daniel Perez",1087212345));
-		bank.registerClient(new Client("Andres Peñalosa",1087652891));
-		bank.registerClient(new Client("Andres Colmenares", 872109872));
-		bank.registerClient(new Client("Amaranta Perea",912385123));
-		bank.registerClient(new Client("Andrew Peñaperez",1986091821));
-		bank.registerClient(new Client("Alvarito Paramilito",2123912351));
+		bank.registerClient("Daniel Perez",1087212345, 0);
+		bank.registerClient("Andres Peñalosa",1087652891,0);
+		bank.registerClient("Andres Colmenares", 872109872,0);
+		bank.registerClient("Amaranta Perea",912385123,0);
+		bank.registerClient("Andrew Peñaperez",1986091821,0);
+		bank.registerClient("Alvarito Paramilito",2123912351,0);
 	}
-	void setUp2(){
+	
+	void  setUp2(){
 		bank =new Bank();
 	}
-	void setUp3(){
+	
+	void  setUp3(){
 		bank = new Bank();
-		bank.registerClient(new Client("Amaranta Perea",912385123));
-		bank.registerClient(new Client("Andrew Peñaperez",1986091821));
-		bank.registerClient(new Client("Alvarito Paramilito",2123912351));
+		bank.registerClient("Amaranta Perea",912385123,0);
+		bank.registerClient("Andrew Peñaperez",1986091821,0);
+		bank.registerClient("Alvarito Paramilito",2123912351,0);
 	}
 
 	@Test
 	void testRegisterClient() {
-		setUp3();
-		Client  c = new Client("Capitan Teemo",666);
-		bank.registerClient(c);
-		 assertTrue(bank.searchClient(666).equals(c));
+		setUp2();
+		Client c = new Client("Capitan Teemo",666, null, null);
+		bank.registerClient("Capitan Teemo",666,0);
+		 assertTrue(bank.searchClient(666).getCc()==c.getCc());
 	}
 	@Test
 	void testAddToClientQueue() {
@@ -43,8 +48,7 @@ class BankTest {
 		bank.addClientToQueue(bank.searchClient(912385123));
 		bank.addClientToQueue(bank.searchClient(1986091821));
 		bank.addClientToQueue(bank.searchClient(2123912351));
-		
-		assertTrue(!bank.getClientQueue().isEmpty());
+	
 		
 	}
 	
@@ -58,16 +62,7 @@ class BankTest {
 		assertTrue(bank.getPrioriQueue().Head().equals(bank.searchClient(1986091821)));
 		
 	}
-
-	@Test
-	void testCancelAccount() {
-		setUp1();
-		
-		Client c1 = bank.searchClient(1087212345);
-		
-		assertTrue(bank.cancelAcount(1087212345).equals(c1));
-	}
-
+	
 	@Test
 	void testSearchClient() {
 		setUp1();
@@ -76,34 +71,28 @@ class BankTest {
 		
 		assertTrue(bank.searchClient(1087212345).equals(c1));
 	}
-
 	
-	//Not working properly
+	@Test
+	void testCancelAccount() {
+		
+		setUp1();
+		
+		Client c1 = bank.searchClient(1087212345);
+		
+		assertTrue(bank.cancelAcount(1087212345).equals(c1));
+	}
+
 	@Test
 	void testUndo() {
 		setUp2();
 		
-		Client c1 = new Client("Capitan Teemo",6669);
+		Client c1 = new Client("Capitan Teemo",6669,new DebitCard(123153,new Date(System.currentTimeMillis()),1923),null);
+		c1.getDebitCard().setAmount((4444+6666)-5000);
+		bank.registerClient("Capitan Teemo",6669,2013);
 		
-		bank.registerClient(c1);
-		
-		bank.makeATransaction(c1.getCc(),4444);
-		bank.makeATransaction(c1.getCc(),6666);
-		bank.makeATransaction(c1.getCc(),-5000);
-		
-		String rs  = bank.undo(c1.getCc());
-		
+		bank.makeATransaction(c1.getCc(), 2550);
+		assertTrue(!bank.undo(c1.getCc()).getLastTransaction().isEmpty());;
 		
 	}
 
-	@Test
-	void testMakeATransaton() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testDateToString() {
-		fail("Not yet implemented");
-	}
 }
-

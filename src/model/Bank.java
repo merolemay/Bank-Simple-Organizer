@@ -1,12 +1,25 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import BTS.BTS;
 import HashTable.HashTable;
 import Queue.Queue;
+import linkedList.Node;
 import priorityQueue.PriorityQueue;
+import sortmethods.HeapSort;
+import sortmethods.SortingMetdos;
 
 /**This is the Main Class of the Bank Simply Organizer Project 
  * which is mean to be a simple organizer for attending Clients in a bank.
@@ -16,32 +29,107 @@ import priorityQueue.PriorityQueue;
  * @date Unreleased
  * 
  */
-public class Bank {
+public class Bank implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private HashTable<Integer,Client> bank;
-
-	
+	private ArrayList<Client> clients;
 	private Queue<Client> clientQueue;
 	private PriorityQueue<Client> prioriQueue;
-
+	private int numsCards=100000000;
 	/** The constructor of the Class bank which starts with a designate administrator
 	 *  which takes control of the .
 	 * @param admin: The administrator of the bank.
 	 */
 	public Bank() {
-		bank = new HashTable<Integer,Client>(19);
+		clients = new ArrayList<Client>();
+		bank = new HashTable<Integer,Client>(90);
 		clientQueue = new Queue<Client>();
 		prioriQueue = new PriorityQueue<Client>(12);	
 	}
 	
+	public void loadBankData() {
+		ObjectInputStream leyendoFichero;
+		try {
+			leyendoFichero = new ObjectInputStream(new FileInputStream("../data/BankData") );
+			@SuppressWarnings("unchecked")
+			HashTable<Integer,Client> readObject = ( HashTable<Integer,Client>)leyendoFichero.readObject();
+			bank = readObject;
+            leyendoFichero.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	            
+	}
+	public void loadClients() {
+		ObjectInputStream leyendoFichero;
+		try {
+			leyendoFichero = new ObjectInputStream(new FileInputStream("../data/ClienList") );
+			@SuppressWarnings("unchecked")
+			ArrayList<Client> readObject = (ArrayList<Client>)leyendoFichero.readObject();
+			clients = readObject;
+            leyendoFichero.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	            
+	}
+	public void saveBankData() {
+		ObjectOutputStream escribiendoFichero;
+		try {
+			escribiendoFichero = new ObjectOutputStream(new FileOutputStream("../data/BankData") );
+			escribiendoFichero.writeObject(bank);
+            escribiendoFichero.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}     
+	}
 	
+	public void saveClienList() {
+		ObjectOutputStream escribiendoFichero;
+		try {
+			escribiendoFichero = new ObjectOutputStream(new FileOutputStream("../data/ClienList") );
+			escribiendoFichero.writeObject(clients);
+            escribiendoFichero.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}     
+	}
 	
 	/** Registers a Client in the bank data base (HashTable).
 	 * @param c : the client that is going to be inserted.
 	 */
-	public void registerClient(Client c) {
+	public void registerClient(String name, int cc,double amount) {
+		Date date = new Date(System.currentTimeMillis());
+		int cardNumber = (int) (Math.random() *9999999+ 1000000);
+		cardNumber += numsCards;
+		numsCards++;
+		DebitCard debitCard = new DebitCard(amount,date,cardNumber);
+		Client c = new Client(name, cc,debitCard,null);
+		
+		clients.add(c);
 		bank.put(c.getCc(), c);
 	}
+	
+	public void registerClient(String name, int cc,double amount,double balance,int limit) {
+		Date date = new Date(System.currentTimeMillis());
+		int cardNumber = (int) (Math.random() *9999999+ 1000000);
+		cardNumber += numsCards;
+		numsCards++;
+		CreditCard creditCard = new CreditCard(balance,date,numsCards,limit);
+		DebitCard debitCard = new DebitCard(amount,date,cardNumber);
+		Client c = new Client(name, cc,debitCard,creditCard);
+		
+		clients.add(c);
+		bank.put(c.getCc(), c);
+		
+	}
+	
 	
 	
 	public void addClientToQueue(Client c) {
@@ -81,9 +169,9 @@ public class Bank {
 	 * 
 	 * example: The last transaction was a withdraw of -99,99$.
 	 */
-	public String undo(int cc) {	
+	public Transactions undo(int cc) {	
 		Transactions rs = bank.get(cc).getTransactions().pop();
-		return rs.getLastTransaction();
+		return rs;
 	}
 	
 	/** Makes a new transaction 
@@ -118,5 +206,149 @@ public class Bank {
 		return prioriQueue;
 	}
 	
+	public Client[] getArrayClients() {
+		Client[] c = new Client[clients.size()];
+		for(int i=0;i<c.length;i++) {
+			c[i]=clients.get(i);
+		}
+		return c;
+	}
+		
+	
+	public  Client[] selectionSortName() {
+		
+		Client[] list = getArrayClients();
+		
+		 for(int i=0; i<list.length -1; i++) {
+			 
+	            int iSmallest = i;
+
+	            for(int j=i+1; j<list.length; j++)
+	            {
+	                if(list[iSmallest].getName().compareTo(((list[j].getName()))) > 0  )
+	                {
+	                    iSmallest = j;
+	                }
+	            }
+	            Client iSwap = list[iSmallest];
+	            list[iSmallest] = list[i];
+	            list[i] = iSwap;
+	     
+	        }
+		 return list;
+	}
+	
+	public Client[] heapSortId() {
+		Client[] c = getArrayClients();
+		HeapSort h;
+		h = new HeapSort();
+		return h.sort(c);
+	}
+	
+	public Client[] mergeSortMethod() {
+		Client[] c = getArrayClients();
+		
+		mergeSort(c,0,c.length);
+		
+		return c;
+	}
+	
+	public Client[] mergeSort(Client[] list,int start,int end) {
+
+
+        if  (list.length <= 1) {
+
+            throw new IllegalArgumentException("There is only 1 account or is null");
+
+        }else {
+            int middle = list.length/2;
+            mergeSort(list,start,middle);
+            mergeSort(list,middle+1,end);
+
+            merge(list,start,middle,end);
+            
+            
+        }
+        return list;
+
+
+    }
+
+	public void merge(Client[] list,int start, int middle, int end) {
+		Client[] left  = new Client[middle - start+1];
+		Client[] right = new Client[end - middle];
+
+		for (int i = 0; i < left.length; ++i)
+			left[i] = list[start+i];
+
+		for (int i = 0; i < right.length; ++i)
+			right[i] = list[middle + i+1];
+
+		int leftI= 0;
+		int rightI = 0;
+		int currentI = 0;
+
+		while (leftI < left.length && rightI < right.length)
+		{
+			if (( left[leftI].getRegisterDate()).compareTo( right[rightI].getRegisterDate()) <= 0)
+			{
+				list[currentI] = left[leftI];
+				leftI++;
+			}
+			else
+			{
+				list[currentI] = right[rightI];
+				rightI++;
+			}
+			currentI++;
+		}
+	
+		while (leftI < left.length) {
+			currentI++;
+			leftI++;
+			list[currentI] = left[leftI];
+		}
+
+		while (rightI < right.length) {
+			currentI++;
+			rightI++;
+			list[currentI] = right[rightI];
+		}
+	}
+	
+	
+	
+	
+	public ArrayList<Client> bstSort() {
+		
+		Client[] list = getArrayClients();
+		
+		BTS<Client> tree = new BTS<>();
+		for(int i=0;i<list.length;i++) {
+			tree.addNode(list[i]);
+		}
+		
+		tree.traverseInOrder(tree.getRoot());
+		
+		ArrayList<Client> listA= new ArrayList<Client>(Arrays.asList(list));
+		
+		return listA;
+	}
+	
+	public ArrayList<Client> getArrayListClient(){
+		 ArrayList<Client> arrClient = new ArrayList<>();
+		 Client c;
+		int size = clientQueue.size();
+		 if(!clientQueue.isEmpty())
+		
+			for(int i=0;i<size;i++) {
+				c = clientQueue.dequeue();
+				arrClient.add(c);
+				clientQueue.enqueue(c);
+			}
+			return arrClient;
+	}
+	
+
 	
 }

@@ -1,10 +1,15 @@
 package priorityQueue;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class PriorityQueue <E> {
+public class PriorityQueue <E> implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final Object[] table;
 	private final int capacity;
 	private int size;

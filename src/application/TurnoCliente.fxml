@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -31,17 +30,31 @@
                   <Label text="Fila de destino: " />
                   <RadioButton fx:id="normalQueueRadio" mnemonicParsing="false" text="Normal">
                      <toggleGroup>
-                        <ToggleGroup fx:id="Itype" />
+                        <ToggleGroup fx:id="Fila" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="priorityQueueRadio" mnemonicParsing="false" text="Prioridad" toggleGroup="$Itype" />
+                  <RadioButton fx:id="priorityQueueRadio" mnemonicParsing="false" text="Prioridad" toggleGroup="$Fila" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="214.0" prefHeight="24.0" prefWidth="600.0">
+               <children>
+                  <Label text="Prioridad:" />
+                  <RadioButton fx:id="firstPriority" mnemonicParsing="false" text="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Prioridad" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="secondPriority" mnemonicParsing="false" text="2" toggleGroup="$Prioridad" />
+                  <RadioButton fx:id="thirdPriority" layoutX="338.0" layoutY="14.0" mnemonicParsing="false" text="3" toggleGroup="$Prioridad" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#loadClientCreat" text="Registrar Nuevo Cliente" />
+                  <Button mnemonicParsing="false" onAction="#loadClientCreat" text="Crear un cliente" />
+                  <Button mnemonicParsing="false" onAction="#loadRegisTurn" text="Registrar este turno" />
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadClientQueue" text="Ver fila clientes" />
                   <Button mnemonicParsing="false" onAction="#loadPriorityQueue" text="Ver fila clientes prioridad" />
+                  <Button mnemonicParsing="false" onAction="#loadDatabase" text="Ver Base de Datos" />
                </children>
             </HBox>
          </children>

@@ -1,9 +1,14 @@
 package HashTable;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class HashTable<K, V> implements Map<K,V> {
+public class HashTable<K, V> implements Map<K,V>,Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	LinkedList<HashNode<K,V>>[] table = null;
 	int arraySize = 0;
 	
@@ -70,6 +75,14 @@ public class HashTable<K, V> implements Map<K,V> {
 		}
 		
 		return null;
+	}
+	
+	public int getSize() {
+		return arraySize;
+	}
+	
+	public LinkedList<HashNode<K,V>>[] getTable(){
+		return table;
 	}
 	
 

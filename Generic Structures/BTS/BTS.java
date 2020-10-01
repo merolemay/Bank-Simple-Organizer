@@ -1,10 +1,17 @@
 package BTS;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BTS<T> {
+
+public class BTS<T extends Comparable<? super T>> implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Node<T> root;
+	
 	
 	
 	/**
@@ -24,15 +31,16 @@ public class BTS<T> {
 	 * @return : The recursive return.
 	 */
 	public Node<T> addNodeRecursive(Node<T> current,T value) {	
+		
 		if(current==null) {
 		return new Node<T> (value);
 		} 
 		
-		if((Integer)value < (Integer)current.getValue()) {
+		if(value.compareTo(current.getValue())>0) {
 			current.nodeLeft = addNodeRecursive(current.nodeLeft,value);
 		}
 		
-		else if((Integer)value > (Integer)current.getValue()) {
+		else if(value.compareTo(current.getValue())<0) {
 			current.nodeRight = addNodeRecursive(current.nodeRight,value);
 		} else {
 			//The value exist
@@ -61,7 +69,7 @@ public class BTS<T> {
 	    		return null;
 	    	}
 	    } 
-	    if ((Integer)value < (Integer)current.getValue()) {
+	    if ((Double)value < (Double)current.getValue()) {
 	        current.nodeLeft = deleteRecursive(current.nodeLeft, value);
 	        return current;
 	    }
@@ -96,8 +104,7 @@ public class BTS<T> {
 	    	report +=" " + node.getValue();
 	        traverseInOrder(node.nodeLeft);
 	        traverseInOrder(node.nodeRight);
-	    }
-	    
+	    }  
 	    return report;
 	}
 	
@@ -143,6 +150,10 @@ public class BTS<T> {
 	        }
 	    }
 	    return report;
+	}
+	
+	public Node<T> getRoot() {
+		return root;
 	}
 }
 

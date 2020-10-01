@@ -4,7 +4,7 @@ import java.util.Date;
 
 import Stack.Stack;
 
-public class Client {
+public class Client implements Comparable<Client> {
 	
 	private String name;
 	private int cc;
@@ -19,11 +19,11 @@ public class Client {
 	 * @param bankAcountNumber : Number which the account of the client is in the data base
 	 * @param registerDate : The date in which the Client was registered into the bank
 	 */
-	public Client(String name, int cc) {
+	public Client(String name, int cc,DebitCard debitCard, CreditCard creditCard) {
 		this.name = name;
 		this.cc = cc;
-		this.debitCard = null;
-		this.creditCard = null;
+		this.debitCard = debitCard;
+		this.creditCard = creditCard;
 		transactions = new Stack<Transactions>();
 		registerDate = new Date(System.currentTimeMillis());
 	}
@@ -108,7 +108,7 @@ public class Client {
 		}
 		return s;
 		
-		
+
 	
 	}
 	
@@ -127,10 +127,22 @@ public class Client {
 			s=true;
 		}
 		return s;
+
 		
 	}
 	
 	public Date getRegisterDate() {
 		return registerDate;
 	}
+
+	@Override
+	public int compareTo(Client o) {
+		if(cc > o.getCc()) {
+			return 1;
+		}
+		else
+			return -1;
+	}
+	
+	
 }

@@ -7,11 +7,11 @@ public class CreditCard {
 	private double balance;
 	private Date creationDate;
 	private int number;
-	private double limit;
+	private int limit;
 	private Date dateOfPay;
 	
 	
-	public CreditCard(double balance, Date creationDate, int number, double limit) {
+	public CreditCard(double balance, Date creationDate, int number, int limit) {
 		this.balance = balance;
 		this.creationDate = creationDate;
 		this.number = number;
@@ -43,7 +43,7 @@ public class CreditCard {
 		return limit;
 	}
 
-	public void setLimit(double limit) {
+	public void setLimit(int limit) {
 		this.limit = limit;
 	}
 

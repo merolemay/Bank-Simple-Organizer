@@ -1,17 +1,17 @@
 package sortmethods;
-import java.io.*;
 
+import model.Client;
 
 public class HeapSort 
 {
-    private static int[] a;
-    private static int n;
-    private static int left;
-    private static int right;
-    private static int largest;
+    private Client[] a;
+    private int  n;
+    private int left;
+    private int right;
+    private int largest;
 
     // Build-Heap Function
-    public static void buildheap(int []a){
+    public void buildheap(Client []a){
     	n=a.length-1;
     	for(int i=n/2;i>=0;i--){
     		System.out.println(i);
@@ -20,19 +20,19 @@ public class HeapSort
     }
     
     // Max-Heap Function
-    public static void maxheap(int[] a, int i){
+    public void maxheap(Client[] a, int i){
     	
     	left=2*i;
     	right=2*i+1;
     	
-    	if(left <= n && a[left] > a[i]){
+    	if(left <= n && a[left].getCc() > a[i].getCc()){
     		largest=left;
     	}
     	else{
     		largest=i;
     	}
     	
-    	if(right <= n && a[right] > a[largest]){
+    	if(right <= n && a[right].getCc() > a[largest].getCc()){
     		largest=right;
     	}
     	if(largest!=i){
@@ -44,15 +44,19 @@ public class HeapSort
 
     
     // Exchange Function
-    public static void exchange(int i, int j){
-    	int t=a[i];
+    public void exchange(int i, int j){
+    	Client t=a[i];
     	a[i]=a[j];
     	a[j]=t; 
     	}
     
     // Sort Function
-    public static void sort(int []a0){
-    	a=a0;
+    public Client[] sort(Client[] c){
+    	int[] id = new int[c.length];
+    	for(int i=0;i<c.length;i++) {
+    		id[i]=c[i].getCc();
+    	}
+    	a=c;
     	buildheap(a);
     	
     	for(int i=n;i>0;i--){
@@ -60,6 +64,7 @@ public class HeapSort
     		n=n-1;
     		maxheap(a, 0);
     	}
+    	return c;
     }
 
     	
