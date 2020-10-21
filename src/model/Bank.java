@@ -1,6 +1,7 @@
 package model;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -51,54 +52,44 @@ public class Bank implements Serializable{
 		prioriQueue = new PriorityQueue<Client>(12);	
 	}
 	
-	public void loadBankData() {
+	public void loadBankData() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ObjectInputStream leyendoFichero;
-		try {
-			leyendoFichero = new ObjectInputStream(new FileInputStream("../data/BankData") );
+	
+			leyendoFichero = new ObjectInputStream(new FileInputStream("./data/BankData") );
 			@SuppressWarnings("unchecked")
 			HashTable<Integer,Client> readObject = ( HashTable<Integer,Client>)leyendoFichero.readObject();
 			bank = readObject;
             leyendoFichero.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 	            
 	}
-	public void loadClients() {
+	public void loadClients() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ObjectInputStream leyendoFichero;
-		try {
-			leyendoFichero = new ObjectInputStream(new FileInputStream("../data/ClienList") );
+	
+			leyendoFichero = new ObjectInputStream(new FileInputStream("./data/ClienList") );
 			@SuppressWarnings("unchecked")
 			ArrayList<Client> readObject = (ArrayList<Client>)leyendoFichero.readObject();
 			clients = readObject;
             leyendoFichero.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	            
 	}
-	public void saveBankData() {
+	public void saveBankData() throws FileNotFoundException, IOException {
 		ObjectOutputStream escribiendoFichero;
-		try {
-			escribiendoFichero = new ObjectOutputStream(new FileOutputStream("../data/BankData") );
+	
+			escribiendoFichero = new ObjectOutputStream(new FileOutputStream("./data/BankData") );
 			escribiendoFichero.writeObject(bank);
             escribiendoFichero.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}     
+	   
 	}
 	
-	public void saveClienList() {
+	public void saveClienList() throws FileNotFoundException, IOException {
 		ObjectOutputStream escribiendoFichero;
-		try {
-			escribiendoFichero = new ObjectOutputStream(new FileOutputStream("../data/ClienList") );
+	
+			escribiendoFichero = new ObjectOutputStream(new FileOutputStream("./data/ClienList") );
 			escribiendoFichero.writeObject(clients);
             escribiendoFichero.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}     
+  
 	}
 	
 	/** Registers a Client in the bank data base (HashTable).
@@ -114,6 +105,7 @@ public class Bank implements Serializable{
 		
 		clients.add(c);
 		bank.put(c.getCc(), c);
+		
 	}
 	
 	public void registerClient(String name, int cc,double amount,double balance,int limit) {
@@ -212,6 +204,10 @@ public class Bank implements Serializable{
 			c[i]=clients.get(i);
 		}
 		return c;
+	}
+	
+	public ArrayList<Client> getArrayListClients(){
+		return clients;
 	}
 		
 	
@@ -335,7 +331,7 @@ public class Bank implements Serializable{
 		return listA;
 	}
 	
-	public ArrayList<Client> getArrayListClient(){
+	public ArrayList<Client> getArrayListClientQueue(){
 		 ArrayList<Client> arrClient = new ArrayList<>();
 		 Client c;
 		int size = clientQueue.size();

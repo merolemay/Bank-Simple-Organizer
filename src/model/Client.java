@@ -9,6 +9,7 @@ public class Client implements Comparable<Client> {
 	private String name;
 	private int cc;
 	private DebitCard debitCard;
+	private double amount;
 	private CreditCard creditCard;
 	private Stack<Transactions> transactions;
 	private Date registerDate;
@@ -20,6 +21,7 @@ public class Client implements Comparable<Client> {
 	 * @param registerDate : The date in which the Client was registered into the bank
 	 */
 	public Client(String name, int cc,DebitCard debitCard, CreditCard creditCard) {
+		amount = debitCard.getAmount();
 		this.name = name;
 		this.cc = cc;
 		this.debitCard = debitCard;
@@ -143,6 +145,8 @@ public class Client implements Comparable<Client> {
 		else
 			return -1;
 	}
+	
+	
 	
 	
 }

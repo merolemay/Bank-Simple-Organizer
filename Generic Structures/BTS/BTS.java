@@ -30,7 +30,7 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	 * @param value : The value of the node that is going to be added.
 	 * @return : The recursive return.
 	 */
-	public Node<T> addNodeRecursive(Node<T> current,T value) {	
+	private Node<T> addNodeRecursive(Node<T> current,T value) {	
 		
 		if(current==null) {
 		return new Node<T> (value);
@@ -49,13 +49,24 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	
 		return current;
 	}
-	
+	public boolean delete(T value) {
+		if(value.equals(root.getValue())) {
+			if(root.nodeLeft==null && root.nodeRight==null) {
+				root=null;
+				return true;
+			} else
+				return false;
+		}
+		else {
+			return (deleteRecursive(root,value).equals(null))?true:false;
+		}
+	}
 	/** Recursive Method for deleting a Node with no children of the BTS.
 	 * @param current : Current position in the tree.
 	 * @param value : Value of the Node which is going to be deleted.
 	 * @return : Returns the Node as a null when is deleted o a system out print if the node has children.
 	 */
-	public Node<T> deleteRecursive(Node<T> current,T value) {
+	private Node<T> deleteRecursive(Node<T> current,T value) {
 		if (current == null) {
 	        return null;
 	    }
@@ -65,11 +76,11 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	    		current=null;
 	    		deleteRecursive(current, value);
 	    	} else {
-	    		System.out.println("This node can't be deleted because has chilndrens");
+	    		System.out.println("This node can't be deleted because has chilndren");
 	    		return null;
 	    	}
 	    } 
-	    if ((Double)value < (Double)current.getValue()) {
+	    if ((Integer)value < (Integer)current.getValue()) {
 	        current.nodeLeft = deleteRecursive(current.nodeLeft, value);
 	        return current;
 	    }

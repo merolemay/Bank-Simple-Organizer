@@ -1,7 +1,9 @@
 package application;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import Queue.Queue;
@@ -28,6 +30,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;
 import model.Bank;
 import model.Client;
+import model.DebitCard;
 
 
 public class BankOrganizerGUI implements Initializable{
@@ -42,10 +45,10 @@ public class BankOrganizerGUI implements Initializable{
 	private TableColumn<Client, Integer> tclID;
 
 	@FXML
-	private TableColumn<Client, Integer> tclAmount;
+	private TableColumn<Client, Double> tclAmount;
 
 	@FXML
-	private TableColumn<Client, String> tclIncDate;
+	private TableColumn<Client,String> tclIncDate;
 
 	@FXML
 	private BorderPane mainPane;
@@ -95,22 +98,7 @@ public class BankOrganizerGUI implements Initializable{
 
 	}
 
-	@FXML
-	private TextField txtNameCreation;
-
-	@FXML
-	private TextField txtIDcreation;
-	@FXML
-	private CheckBox creditCardOption;
-
-    @FXML
-    private TextField txtInitialAmount;
-
-    @FXML
-    private TextField txtMoneyToPay;
-
-    @FXML
-    private TextField txtLimit;
+	
 
 	@FXML
 	void loadBackCreat(ActionEvent event) throws Exception {
@@ -313,7 +301,9 @@ public class BankOrganizerGUI implements Initializable{
 
 	@FXML
 	void loadDatabase(ActionEvent event) throws IOException {
-
+		if(!myBank.getArrayListClients().isEmpty()) {
+			inicializeTVClientsDataBase();
+		}
 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("baseDeDatos.fxml"));
 		fxmlLoader.setController(this);
@@ -324,13 +314,33 @@ public class BankOrganizerGUI implements Initializable{
 
 		mainPane.getChildren().clear();
 		mainPane.setCenter(registry);
+		
+		
 	}
+
+	
+	public void inicializeTVClientsDataBase() {
+		
+		
+
+		ObservableList<Client> observableList = FXCollections.observableArrayList(myBank.getArrayListClients());
+		txBaseTV.setItems(observableList);
+		tclName.setCellValueFactory(new PropertyValueFactory<Client, String>("name"));
+		tclID.setCellValueFactory(new PropertyValueFactory<Client, Integer>("cc"));
+		tclAmount.setCellValueFactory(new PropertyValueFactory<Client, Double>("amount"));
+		tclIncDate.setCellValueFactory(new PropertyValueFactory<Client,String>("registerDate"));
+
+
+	}
+
 
 	@FXML
 	void loadRegisTurn(ActionEvent event) {
 
 
 		String idTurn = txtIDturn.getText();
+		
+		
 
 		try {
 
@@ -375,6 +385,22 @@ public class BankOrganizerGUI implements Initializable{
 
 
 	}
+	@FXML
+	private TextField txtNameCreation;
+
+	@FXML
+	private TextField txtIDcreation;
+	@FXML
+	private CheckBox creditCardOption;
+
+    @FXML
+    private TextField txtInitialAmount;
+
+    @FXML
+    private TextField txtMoneyToPay;
+
+    @FXML
+    private TextField txtLimit;
 
 	@FXML
 	void loadClientCreat(ActionEvent event) {
@@ -383,11 +409,15 @@ public class BankOrganizerGUI implements Initializable{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClientCreation.fxml"));
 		fxmlLoader.setController(this);
 		Parent registry = null;
+		
 		try {
 			registry = fxmlLoader.load();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NullPointerException np) {
+			np.printStackTrace();
 		}
 
 		mainPane.getChildren().clear();
@@ -398,7 +428,7 @@ public class BankOrganizerGUI implements Initializable{
 
 	@FXML
 	void loadClientQueue(ActionEvent event) {
-		if(!myBank.getArrayListClient().isEmpty()) {
+		if(!myBank.getArrayListClientQueue().isEmpty()) {
 
 			inicializeTVClientQueue();
 		}
@@ -423,9 +453,9 @@ public class BankOrganizerGUI implements Initializable{
 
 	public void inicializeTVClientQueue() {
 
-
+		
 		ObservableList<Client> observableList;
-		observableList = FXCollections.observableArrayList(myBank.getArrayListClient());
+		observableList = FXCollections.observableArrayList(myBank.getArrayListClientQueue());
 
 		tvFilaCliente.setItems(observableList);
 		tclNombreFC.setCellValueFactory(new PropertyValueFactory<Client, String>("name"));
@@ -530,7 +560,22 @@ public class BankOrganizerGUI implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		myBank = new Bank();
+		/*
+		try {
+			myBank.loadBankData();
+			myBank.loadClients();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
 
 }
