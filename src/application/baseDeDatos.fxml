@@ -18,7 +18,7 @@
                 <TableColumn fx:id="tclName" prefWidth="75.0" sortType="DESCENDING" text="Nombre" />
                 <TableColumn fx:id="tclID" prefWidth="176.0" sortType="DESCENDING" text="Cedula" />
                   <TableColumn fx:id="tclAmount" prefWidth="172.0" sortType="DESCENDING" text="Monto" />
-                  <TableColumn fx:id="tclIncDate" prefWidth="176.0" sortType="DESCENDING" text="Fecha de incorporación" />
+                  <TableColumn fx:id="tclIncDate" prefWidth="176.0" sortType="DESCENDING" text="Fecha de incorporaciÃ³n" />
               </columns>
             </TableView>
             <Label text="Ordenar por :" />
@@ -27,11 +27,11 @@
                   <Button mnemonicParsing="false" onAction="#loadSortByName" prefHeight="25.0" prefWidth="86.0" text="Nombre" />
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadSortIByID" text="Cedula" />
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadSortByAmount" text="Monto" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadSortByIncDate" text="Fecha de incorporación" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadSortByIncDate" text="Fecha de incorporaciÃ³n" />
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#loadStartWindowBD" text="Volver" />
          </children>
       </VBox>
    </center>
-</BorderPane>
+</BorderPane

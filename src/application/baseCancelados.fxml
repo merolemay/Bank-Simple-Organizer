@@ -15,12 +15,12 @@
             <TableView fx:id="txBaseTV" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="tclNameCancel" prefWidth="214.0" text="Nombre" />
-                <TableColumn fx:id="tcCancelationDate" prefWidth="153.0" text="Fecha de Cancelación" />
-                  <TableColumn fx:id="tclReasons" prefWidth="232.0" text="Razón" />
+                <TableColumn fx:id="tcCancelationDate" prefWidth="153.0" text="Fecha de CancelaciÃ³n" />
+                  <TableColumn fx:id="tclReasons" prefWidth="232.0" text="RazÃ³n" />
               </columns>
             </TableView>
             <Button mnemonicParsing="false" onAction="#loadStartWindow" text="Volver" />
          </children>
       </VBox>
    </center>
-</BorderPane>
+</BorderPane

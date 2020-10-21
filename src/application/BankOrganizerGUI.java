@@ -34,6 +34,10 @@ import model.DebitCard;
 
 
 public class BankOrganizerGUI implements Initializable{
+	
+	public BankOrganizerGUI(Bank b) {
+		myBank = b;
+	}
 
 	@FXML
 	private TableView<Client> txBaseTV;
@@ -54,10 +58,9 @@ public class BankOrganizerGUI implements Initializable{
 	private BorderPane mainPane;
 
 	private Bank myBank;
+	
 
-	public BankOrganizerGUI(Bank d) {
-		myBank = d;
-	}
+
 	@FXML
 	void loadStartWindowBD(ActionEvent event) throws Exception {
 
@@ -359,23 +362,31 @@ public class BankOrganizerGUI implements Initializable{
 	void loadRegisTurn(ActionEvent event) {
 
 
-		String idTurn = txtIDturn.getText();
+		
 		
 		
 
 		try {
-		
-			if(idTurn == "") {
-				throw new invalidInformationException();
-				
-				
+			
+			String idTurn = txtIDturn.getText();
+			String nameTurn = txtNameTurn.getText();
+			
+			if(true) {
 				
 			
-			
-			
+			myBank.addClientToQueue(myBank.searchClient(Integer.parseInt(idTurn)));
 			
 			
 			}
+			if(idTurn == "" && nameTurn == "" ) {
+				
+				throw new invalidInformationException();
+
+			}
+			
+			
+			
+			
 			
 
 
@@ -583,6 +594,8 @@ public class BankOrganizerGUI implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		myBank = new Bank();
+	
+		
 		/*
 		try {
 			myBank.loadBankData();

@@ -81,6 +81,9 @@ public class PriorityQueue <E> implements Serializable {
         }
     }
     
+    public int getSize() {
+		return size;
+	}
     
 	public boolean isEmpty() {
 		

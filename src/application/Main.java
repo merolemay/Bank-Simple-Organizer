@@ -1,47 +1,48 @@
 package application;
 	
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import model.Bank;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
+import model.Bank;
 
 
 
 public class Main extends Application {
 	
-	private static BankOrganizerGUI bankGUI;
-	private static Bank myBank;
+	private BankOrganizerGUI bankGUI;
 	private Scene scene;
-	
-
+	private Bank bank;
+	public Main() {
+		bankGUI = new BankOrganizerGUI(bank);
+	}
 	
 	@Override
-	public void start(Stage stage) throws Exception {
-			
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+	public void start(Stage stage)   {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
 
-		loader.setController(bankGUI);
-		Parent root = loader.load();
+			Parent root = loader.load();
 
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.setTitle("Bank Organizer");
-		bankGUI.loadStartWindowFP(null);
-		stage.show();
-		stage.sizeToScene();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.setTitle("Bank Organizer");
+			bankGUI.loadStartWindowFP(null);
+			stage.show();
+			stage.sizeToScene();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 	}
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-
-		launch(args);	
+	
+		
+		launch(args);
 	}
+	
 }
