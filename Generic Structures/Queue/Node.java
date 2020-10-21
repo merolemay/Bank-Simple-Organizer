@@ -11,6 +11,8 @@ public class Node<E> {
 	
 	public Node(E obj) {
 		this.data=obj;
+		previous = null;
+		next = null;
 	}
 
 	public Node(E data, Node<E> next, Node<E> previus) {

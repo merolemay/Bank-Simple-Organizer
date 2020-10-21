@@ -58,18 +58,10 @@ public class Queue<E> implements Serializable {
 		if (queueSize == 0){
 	
 			throw new NoSuchElementException();
-		}
-		else if (queueSize == 1){
-			
-			E swap = head.get();
-			head = null;
-			queueSize -= 1;
-			return swap;
-		} else {
-			
+	
+		} else {	
 			E swap = head.get();
 			head = head.getPrevious();
-			head.setNext(null);
 			queueSize -= 1;
 			return swap;
 		}

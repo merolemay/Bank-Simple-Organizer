@@ -22,11 +22,7 @@ public class Main extends Application {
 	private static Bank myBank;
 	private Scene scene;
 	
-	
-	public Main() {
-		if (myBank == null) myBank = new Bank();
-		bankGUI = new BankOrganizerGUI(myBank);
-	}
+
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -45,24 +41,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		ObjectInputStream entrada = null;
-		try
-		{
-			entrada = new ObjectInputStream(new FileInputStream("data" + File.separator + "Registry.txt")); 
-			myBank = (Bank)entrada.readObject(); 
-			entrada.close();
-		}
-		catch(Exception e)
-		{
-			if(entrada != null) entrada.close();
-		}
-		
-		launch(args);
-		
-		
-		ObjectOutputStream salida = new ObjectOutputStream(
-		new FileOutputStream("data" + File.separator + "Registry.txt"));
-		salida.writeObject(myBank);
-		salida.close();
+
+		launch(args);	
 	}
 }

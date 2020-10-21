@@ -173,11 +173,23 @@ public class BankOrganizerGUI implements Initializable{
 					 deuda = Double.parseDouble(deudaS);
 					
 					myBank.registerClient(name,i,amount,deuda,limit);
+					try {
+						loadStartWindow(null);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 				else {
 
 					myBank.registerClient(name,i,amount);
+					try {
+						loadStartWindow(null);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 				}
 
@@ -324,11 +336,20 @@ public class BankOrganizerGUI implements Initializable{
 		
 
 		ObservableList<Client> observableList = FXCollections.observableArrayList(myBank.getArrayListClients());
-		txBaseTV.setItems(observableList);
+		
+		tclName = new TableColumn<Client,String>("name");
 		tclName.setCellValueFactory(new PropertyValueFactory<Client, String>("name"));
+		
+		tclID = new TableColumn<Client,Integer>("cc");
 		tclID.setCellValueFactory(new PropertyValueFactory<Client, Integer>("cc"));
+		
+		tclAmount = new TableColumn<Client,Double>("amount");
 		tclAmount.setCellValueFactory(new PropertyValueFactory<Client, Double>("amount"));
+		
+		tclIncDate = new TableColumn<Client,String>("registerDate");
 		tclIncDate.setCellValueFactory(new PropertyValueFactory<Client,String>("registerDate"));
+		
+		txBaseTV.setItems(observableList);
 
 
 	}
@@ -343,19 +364,18 @@ public class BankOrganizerGUI implements Initializable{
 		
 
 		try {
-
+		
 			if(idTurn == "") {
 				throw new invalidInformationException();
 				
 				
 				
+			
+			
+			
+			
+			
 			}
-			
-			
-			
-			
-			
-			
 			
 
 
@@ -385,6 +405,8 @@ public class BankOrganizerGUI implements Initializable{
 
 
 	}
+	
+	
 	@FXML
 	private TextField txtNameCreation;
 
@@ -453,7 +475,7 @@ public class BankOrganizerGUI implements Initializable{
 
 	public void inicializeTVClientQueue() {
 
-		
+
 		ObservableList<Client> observableList;
 		observableList = FXCollections.observableArrayList(myBank.getArrayListClientQueue());
 

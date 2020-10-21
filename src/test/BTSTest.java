@@ -12,25 +12,6 @@ class BTSTest {
 	}
 
 
-	@Test
-	void testTraverseInOrder() {
-		
-	}
-
-	@Test
-	void testTraversePreOrder() {
-	
-	}
-
-	@Test
-	void testTraversePostOrder() {
-	
-	}
-
-	@Test
-	void testTraverseLevelOrder() {
-	
-	}
 
 	@Test
 	void testGetRoot() {

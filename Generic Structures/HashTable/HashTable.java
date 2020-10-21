@@ -10,14 +10,15 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 	 */
 	private static final long serialVersionUID = 1L;
 	LinkedList<HashNode<K,V>>[] table = null;
+	private static int length;
 	int arraySize = 0;
-	
 	
 	@SuppressWarnings("unchecked")
 	public HashTable(int size) {
 		
 		this.arraySize = size;
 		this.table = new LinkedList[size];
+		length = 0;
 		for (int i = 0; i < table.length; i++) {
 			table[i] = new LinkedList<HashNode<K,V>>();
 		}
@@ -42,7 +43,7 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 				return alt;
 			}
 		}
-		
+		length = length + 1;
 		HashNode<K,V> hashNode = new HashNode<K,V>(key, value);
 		table[index].add(hashNode);
 		return null;
@@ -70,6 +71,7 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 			if (element.getKey().equals(key)) {
 				V altvalue = element.getValue();
 				table[index].remove(element);
+				length = length - 1;
 				return altvalue;
 			}
 		}
@@ -81,6 +83,9 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 		return arraySize;
 	}
 	
+	public int getTableLength() {
+		return length;
+	}
 	public LinkedList<HashNode<K,V>>[] getTable(){
 		return table;
 	}
