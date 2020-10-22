@@ -1,6 +1,6 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +20,6 @@ class HashTableTest {
 		table.put(2,"Andrew");
 		table.put(3,"Carlos");
 	}
-	
-	
 
 
 	@Test
@@ -33,7 +31,7 @@ class HashTableTest {
 		table.put(668,"Capitan Ashe");
 		
 		
-		assertTrue(table.getTableLength()==3);
+		assertTrue(table.numElements()==3);
 	}
 	
 	@Test
@@ -45,7 +43,7 @@ class HashTableTest {
 		table.put(668,"Capitan Ashe");
 		
 		
-		assertTrue(table.getTableLength()==6);
+		assertTrue(table.numElements()==6);
 	}
 
 	@Test
@@ -72,9 +70,11 @@ class HashTableTest {
 		table.remove(2);
 		table.remove(3);
 		
-		assertTrue(table.getTableLength()==0);
+		assertTrue(table.numElements()==0);
 	
 	}
+	
+
 
 
 

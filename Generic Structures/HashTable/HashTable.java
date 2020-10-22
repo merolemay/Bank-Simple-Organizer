@@ -1,15 +1,12 @@
 package HashTable;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
-public class HashTable<K, V> implements Map<K,V>,Serializable  {
+public class HashTable<K, V> implements Map<K,V>  {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	LinkedList<HashNode<K,V>>[] table = null;
+	LinkedList<Node<K,V>>[] table = null;
 	private static int length;
 	int arraySize = 0;
 	
@@ -20,7 +17,7 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 		this.table = new LinkedList[size];
 		length = 0;
 		for (int i = 0; i < table.length; i++) {
-			table[i] = new LinkedList<HashNode<K,V>>();
+			table[i] = new LinkedList<Node<K,V>>();
 		}
 	}
 	
@@ -36,7 +33,7 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 	public V put(K key, V value) {
 		int index = hashFunction(key);
 	
-		for (HashNode<K,V> element : table[index]) {
+		for (Node<K,V> element : table[index]) {
 			if (element.getKey().equals(key)) {
 				V alt = element.getValue();
 				element.setValue(value);
@@ -44,7 +41,7 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 			}
 		}
 		length = length + 1;
-		HashNode<K,V> hashNode = new HashNode<K,V>(key, value);
+		Node<K,V> hashNode = new Node<K,V>(key, value);
 		table[index].add(hashNode);
 		return null;
 	}
@@ -55,7 +52,7 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 	public V get(K key) {
 		int index = hashFunction(key);
 	
-		for (HashNode<K,V> element : table[index]) {
+		for (Node<K,V> element : table[index]) {
 			if (element.getKey().equals(key)) {
 				return element.getValue();
 			}
@@ -67,7 +64,7 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 	public V remove(K key) {
 		int index = hashFunction(key);
 
-		for (HashNode<K,V> element : table[index]) {
+		for (Node<K,V> element : table[index]) {
 			if (element.getKey().equals(key)) {
 				V altvalue = element.getValue();
 				table[index].remove(element);
@@ -83,12 +80,24 @@ public class HashTable<K, V> implements Map<K,V>,Serializable  {
 		return arraySize;
 	}
 	
-	public int getTableLength() {
+	public int numElements() {
 		return length;
 	}
-	public LinkedList<HashNode<K,V>>[] getTable(){
+	public LinkedList<Node<K,V>>[] getTable(){
 		return table;
 	}
 	
-
+	public ArrayList<V> toArrayList(){
+		ArrayList<V> array = new ArrayList<V>(arraySize);
+		for (int i = 0; i < table.length; i++) {
+			   @SuppressWarnings({ "unchecked", "rawtypes" })
+			List<V> aList = new ArrayList(table[i]);
+			   for (int j = 0; j < aList.size(); j++) {
+				   array.add(aList.get(j));
+			}
+			   
+		}
+		return array;
+	}
 }
+

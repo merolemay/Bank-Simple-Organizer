@@ -1,7 +1,10 @@
 package priorityQueue;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
+
+import Queue.Queue;
 
 public class PriorityQueue <E> implements Serializable {
 	
@@ -88,6 +91,15 @@ public class PriorityQueue <E> implements Serializable {
 	public boolean isEmpty() {
 		
 		return size < 0;
+	}
+	public ArrayList<E> toArrayList() {
+		ArrayList<E> vojabes = new ArrayList<E>();
+		PriorityQueue<E> q = this;
+		for (int i = 0; i < size; i++) {
+			vojabes.add(q.pop());
+		}
+		
+		return vojabes;
 	}
 }
 

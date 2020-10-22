@@ -9,13 +9,14 @@ public class CreditCard {
 	private int number;
 	private int limit;
 	private Date dateOfPay;
+	private boolean state;
 	
 	
-	public CreditCard(double balance, Date creationDate, int number, int limit) {
+	public CreditCard(double balance, Date creationDate, int number, boolean limit) {
 		this.balance = balance;
 		this.creationDate = creationDate;
 		this.number = number;
-		this.limit = limit;
+		this.state = limit;
 	}
 	
 	public void payCard() {
@@ -63,5 +64,12 @@ public class CreditCard {
 		this.balance = balance;
 	}
 	
+	public void setState(boolean state) {
+		this.state = state;
+	}
+	
+	public boolean isState() {
+		return state;
+	}
 	
 }

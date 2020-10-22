@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,10 +16,8 @@ import java.util.Arrays;
 import BTS.BTS;
 import HashTable.HashTable;
 import Queue.Queue;
-import linkedList.Node;
 import priorityQueue.PriorityQueue;
 import sortmethods.HeapSort;
-import sortmethods.SortingMetdos;
 
 /**This is the Main Class of the Bank Simply Organizer Project 
  * which is mean to be a simple organizer for attending Clients in a bank.
@@ -30,27 +27,29 @@ import sortmethods.SortingMetdos;
  * @date Unreleased
  * 
  */
+@SuppressWarnings("serial")
 public class Bank implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private HashTable<Integer,Client> bank;
-	private ArrayList<Client> clients;
 	private Queue<Client> clientQueue;
 	private PriorityQueue<Client> prioriQueue;
-	private int numsCards=100000000;
+	private static final int NUMS_CARDS=100000000;
+	
+	
 	/** The constructor of the Class bank which starts with a designate administrator
 	 *  which takes control of the .
 	 * @param admin: The administrator of the bank.
 	 */
 	public Bank() {
-		clients = new ArrayList<Client>();
 		bank = new HashTable<Integer,Client>(90);
 		clientQueue = new Queue<Client>();
 		prioriQueue = new PriorityQueue<Client>(12);	
+		
+		registerClient(new Client("",0,0));
+		clientQueue.enqueue(new Client("",0,0));
+		prioriQueue.add(new Client("",0,0), 0);
 	}
+	
 	
 	public void loadBankData() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ObjectInputStream leyendoFichero;
@@ -63,17 +62,7 @@ public class Bank implements Serializable{
 	
 	            
 	}
-	public void loadClients() throws FileNotFoundException, IOException, ClassNotFoundException {
-		ObjectInputStream leyendoFichero;
-	
-			leyendoFichero = new ObjectInputStream(new FileInputStream("./data/ClienList") );
-			@SuppressWarnings("unchecked")
-			ArrayList<Client> readObject = (ArrayList<Client>)leyendoFichero.readObject();
-			clients = readObject;
-            leyendoFichero.close();
 
-	            
-	}
 	public void saveBankData() throws FileNotFoundException, IOException {
 		ObjectOutputStream escribiendoFichero;
 	
@@ -81,55 +70,21 @@ public class Bank implements Serializable{
 			escribiendoFichero.writeObject(bank);
             escribiendoFichero.close();
 	   
-	}
-	
-	public void saveClienList() throws FileNotFoundException, IOException {
-		ObjectOutputStream escribiendoFichero;
-	
-			escribiendoFichero = new ObjectOutputStream(new FileOutputStream("./data/ClienList") );
-			escribiendoFichero.writeObject(clients);
-            escribiendoFichero.close();
-  
-	}
+	}	
 	
 	/** Registers a Client in the bank data base (HashTable).
 	 * @param c : the client that is going to be inserted.
 	 */
-	public void registerClient(String name, int cc,double amount) {
-		Date date = new Date(System.currentTimeMillis());
-		int cardNumber = (int) (Math.random() *9999999+ 1000000);
-		cardNumber += numsCards;
-		numsCards++;
-		DebitCard debitCard = new DebitCard(amount,date,cardNumber);
-		Client c = new Client(name, cc,debitCard,null);
-		
-		clients.add(c);
-		bank.put(c.getCc(), c);
-		
-	}
-	
-	public void registerClient(String name, int cc,double amount,double balance,int limit) {
-		Date date = new Date(System.currentTimeMillis());
-		int cardNumber = (int) (Math.random() *9999999+ 1000000);
-		cardNumber += numsCards;
-		numsCards++;
-		CreditCard creditCard = new CreditCard(balance,date,numsCards,limit);
-		DebitCard debitCard = new DebitCard(amount,date,cardNumber);
-		Client c = new Client(name, cc,debitCard,creditCard);
-		
-		clients.add(c);
-		bank.put(c.getCc(), c);
-		
+	public void registerClient(Client test) {
+		bank.put(test.getCc(), test);
 	}
 	
 	
 	
-	public void addClientToQueue(Client c) {
-		
+	
+	public void addClientToQueue(Client c) {	
 		if(clientQueue.size() < 12) {
-		
 		clientQueue.enqueue(c);
-		
 		}
 	}
 	
@@ -171,43 +126,31 @@ public class Bank implements Serializable{
 	 * @param i : the amount of money that's going to be move into or out of the account.
 	 */
 	public void makeATransaction(int cc, int i) {
-		bank.get(cc).saveTransaction(bank.get(cc), i);
+		bank.get(cc).saveTransaction(i);
 	}
-
-	public String dateToString(Date date) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
-		String strDate = dateFormat.format(date);  
-		return strDate;
-	}
-
-
 
 	public HashTable<Integer, Client> getBank() {
 		return bank;
 	}
 
-
-
+	public ArrayList<Client> getClientQueueList() {
+		return clientQueue.toArrayList();
+	} 
+	
 	public Queue<Client> getClientQueue() {
 		return clientQueue;
 	}
-
-
-
-	public PriorityQueue<Client> getPrioriQueue() {
-		return prioriQueue;
+	
+	public ArrayList<Client> getPrioriQueueList() {
+		return prioriQueue.toArrayList();
 	}
 	
 	public Client[] getArrayClients() {
-		Client[] c = new Client[clients.size()];
-		for(int i=0;i<c.length;i++) {
-			c[i]=clients.get(i);
-		}
-		return c;
+		return	(Client[]) bank.toArrayList().toArray();
 	}
 	
 	public ArrayList<Client> getArrayListClients(){
-		return clients;
+		return bank.toArrayList();
 	}
 		
 	
@@ -231,6 +174,7 @@ public class Bank implements Serializable{
 	            list[i] = iSwap;
 	     
 	        }
+		 
 		 return list;
 	}
 	
@@ -241,11 +185,10 @@ public class Bank implements Serializable{
 		return h.sort(c);
 	}
 	
+	
 	public Client[] mergeSortMethod() {
 		Client[] c = getArrayClients();
-		
 		mergeSort(c,0,c.length);
-		
 		return c;
 	}
 	
@@ -327,7 +270,6 @@ public class Bank implements Serializable{
 		tree.traverseInOrder(tree.getRoot());
 		
 		ArrayList<Client> listA= new ArrayList<Client>(Arrays.asList(list));
-		
 		return listA;
 	}
 	
@@ -343,8 +285,6 @@ public class Bank implements Serializable{
 				clientQueue.enqueue(c);
 			}
 			return arrClient;
-	}
-	
-
+	}	
 	
 }

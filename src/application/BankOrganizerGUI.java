@@ -1,46 +1,44 @@
 package application;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import Queue.Queue;
-import customExceptions.NoFoundException;
 import customExceptions.RepeatUserException;
 import customExceptions.invalidInformationException;
-import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;
 import model.Bank;
 import model.Client;
-import model.DebitCard;
 
 
 public class BankOrganizerGUI implements Initializable{
 	
-	public BankOrganizerGUI(Bank b) {
-		myBank = b;
+	public BankOrganizerGUI() {
+		myBank = new Bank(); 
 	}
+	private Bank myBank;
 
-	@FXML
-	private TableView<Client> txBaseTV;
+	
+	
 
 	@FXML
 	private TableColumn<Client, String> tclName;
@@ -57,8 +55,6 @@ public class BankOrganizerGUI implements Initializable{
 	@FXML
 	private BorderPane mainPane;
 
-	private Bank myBank;
-	
 
 
 	@FXML
@@ -75,23 +71,20 @@ public class BankOrganizerGUI implements Initializable{
 	}
 
 	@FXML
-	void loadSortByIncDate(ActionEvent event) throws Exception {
+	public void loadSortByIncDate(ActionEvent event) throws Exception {
+		myBank.mergeSortMethod();
 
 		loadDatabase( event);
 	}
+	
 
 	@FXML
 	void loadSortByName(ActionEvent event) throws Exception {
-
+		myBank.selectionSortName();
 		loadDatabase( event);
 	}
 
-	@FXML
-	void loadSortIByID(ActionEvent event)throws Exception {
 
-		loadDatabase( event);
-
-	}
 
 	@FXML
 	void loadStartWindow(ActionEvent event) throws Exception {
@@ -278,7 +271,6 @@ public class BankOrganizerGUI implements Initializable{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TurnoCliente.fxml"));
 		fxmlLoader.setController(this);
 		Parent registry = fxmlLoader.load();
-
 		mainPane.getChildren().clear();
 		mainPane.setCenter(registry);
 
@@ -352,7 +344,7 @@ public class BankOrganizerGUI implements Initializable{
 		tclIncDate = new TableColumn<Client,String>("registerDate");
 		tclIncDate.setCellValueFactory(new PropertyValueFactory<Client,String>("registerDate"));
 		
-		txBaseTV.setItems(observableList);
+		//txBaseTV.setItems(observableList);
 
 
 	}
@@ -360,11 +352,6 @@ public class BankOrganizerGUI implements Initializable{
 
 	@FXML
 	void loadRegisTurn(ActionEvent event) {
-
-
-		
-		
-		
 
 		try {
 			
@@ -383,12 +370,6 @@ public class BankOrganizerGUI implements Initializable{
 				throw new invalidInformationException();
 
 			}
-			
-			
-			
-			
-			
-
 
 
 
@@ -400,19 +381,6 @@ public class BankOrganizerGUI implements Initializable{
 			alert.showAndWait();
 
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	}
@@ -593,8 +561,8 @@ public class BankOrganizerGUI implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		myBank = new Bank();
-	
+		
+		BankOrganizerGUI boui = new BankOrganizerGUI();
 		
 		/*
 		try {

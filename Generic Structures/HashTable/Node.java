@@ -1,13 +1,15 @@
 package HashTable;
 
-public class HashNode<K, V>  {
+public class Node<K, V>  {
 	
 	private K key;
 	private V value;
+	Node<K,V> next;
 	
-	public HashNode(K key, V value) {
+	public Node(K key, V value) {
 		this.key = key;
 		this.value = value;
+		next=null;
 	}
 	
 	public K getKey() {
@@ -25,5 +27,12 @@ public class HashNode<K, V>  {
 	public void setValue(V value) {
 		this.value = value;
 	}
+	
+	public int hashCode(int hashTableSize, int i) {
+		return (int) (((Integer)(value)+1) % hashTableSize);
+	}
 
+	public Node<K, V> getNext() {
+		return next;
+	}
 }

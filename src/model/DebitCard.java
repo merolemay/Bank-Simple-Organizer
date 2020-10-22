@@ -7,11 +7,13 @@ public class DebitCard {
 	private double amount;
 	private Date creationDate;
 	private int number;
+	private boolean state;
 	
-	public DebitCard(double amount, Date creationDate, int number) {
+	public DebitCard(double amount, Date creationDate, int number,boolean state) {
 		this.amount = amount;
 		this.creationDate = creationDate;
 		this.number = number;
+		this.state=state;
 	}
 
 	/**
@@ -83,4 +85,11 @@ public class DebitCard {
 		return b;
 	}
 	
+	public void setState(boolean state) {
+		this.state = state;
+	}
+	
+	public boolean isState() {
+		return state;
+	}
 }

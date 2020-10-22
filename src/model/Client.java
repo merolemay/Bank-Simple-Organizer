@@ -13,23 +13,25 @@ public class Client implements Comparable<Client> {
 	private CreditCard creditCard;
 	private Stack<Transactions> transactions;
 	private Date registerDate;
+	private String registerDateString;
 
 	/** Constructor of the Client class using the basic names to register a Client into the bank following the next instances
 	 * @param name : Name of the Client.
 	 * @param cc : Document number of the client.
-	 * @param bankAcountNumber : Number which the account of the client is in the data base
-	 * @param registerDate : The date in which the Client was registered into the bank
 	 */
-	public Client(String name, int cc,DebitCard debitCard, CreditCard creditCard) {
-		amount = debitCard.getAmount();
+	public Client(String name, int cc,double amount) {
 		this.name = name;
 		this.cc = cc;
-		this.debitCard = debitCard;
-		this.creditCard = creditCard;
+		this.amount=amount;
+		debitCard = new DebitCard(0,new Date(System.currentTimeMillis()),0,false);
+		creditCard= new CreditCard(0,new Date(System.currentTimeMillis()),0,false);;
+		registerDate = new Date(System.currentTimeMillis()); 
 		transactions = new Stack<Transactions>();
-		registerDate = new Date(System.currentTimeMillis());
+		transactions.push(new Transactions(new Date(System.currentTimeMillis()),0));
+		registerDateString = registerDate.toString();
 	}
-
+	
+	
 	/**
 	 * @return the name
 	 */
@@ -51,12 +53,7 @@ public class Client implements Comparable<Client> {
 		return cc;
 	}
 
-	/**
-	 * @param cc the cc to set
-	 */
-	public void setCc(int cc) {
-		this.cc = cc;
-	}
+
 
 	/**
 	 * @return the debitCard
@@ -93,24 +90,10 @@ public class Client implements Comparable<Client> {
 		return transactions;
 	}
 
-	/**
-	 * @param transactions the transactions to set
-	 */
-	public void setTransactions(Stack<Transactions> transactions) {
-		this.transactions = transactions;
-	}
 
-	public boolean saveTransaction(Client c, double i) {
-		boolean s;
-		if(debitCard.changeAmount(i)) {
-			c.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));
-			s=true;
-		}else {
-			s=false;
-		}
-		return s;
-		
 
+	public void saveTransaction( double i) {
+		this.getTransactions().push(new Transactions(new Date(System.currentTimeMillis()),i));		
 	
 	}
 	
@@ -136,17 +119,16 @@ public class Client implements Comparable<Client> {
 	public Date getRegisterDate() {
 		return registerDate;
 	}
+	
 
+	
 	@Override
 	public int compareTo(Client o) {
-		if(cc > o.getCc()) {
+		if(amount > o.amount) {
 			return 1;
 		}
 		else
 			return -1;
 	}
-	
-	
-	
-	
+		
 }

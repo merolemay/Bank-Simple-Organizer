@@ -1,6 +1,7 @@
 package Queue;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class Queue<E> implements Serializable {
@@ -80,4 +81,13 @@ public class Queue<E> implements Serializable {
 		}
 	}
 	
+	public ArrayList<E> toArrayList() {
+		ArrayList<E> vojabes = new ArrayList<E>();
+		Queue<E> q = this;
+		for (int i = 0; i < queueSize; i++) {
+			vojabes.add(q.dequeue());
+		}
+		
+		return vojabes;
+	}
 }
