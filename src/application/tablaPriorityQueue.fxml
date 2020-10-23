@@ -7,28 +7,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
-<<<<<<< HEAD
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="priorityPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-=======
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" text="Nombre" />
-            <Button mnemonicParsing="false" text="Cedula" />
-            <Button mnemonicParsing="false" text="Saldo" />
-            <Button mnemonicParsing="false" text="Fecha de vinculacion" />
-            <Button mnemonicParsing="false" text="Ultima Transaccion" />
-            <Button mnemonicParsing="false" text="Prioridad" />
-         </children>
-      </HBox>
-   </bottom>
->>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
    <center>
       <TableView fx:id="tablaPrioridad" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
@@ -63,20 +44,12 @@
          <children>
             <VBox alignment="CENTER" prefHeight="106.0" prefWidth="100.0">
                <children>
-<<<<<<< HEAD
                   <Button fx:id="atenderPriority" mnemonicParsing="false" text="Atender " wrapText="true" />
-=======
-                  <Button mnemonicParsing="false" text="Atender " wrapText="true" />
->>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="181.0" prefWidth="100.0">
                <children>
-<<<<<<< HEAD
                   <Button fx:id="agregarPriority" mnemonicParsing="false" prefHeight="53.0" prefWidth="100.0" text="Agregar a la fila " wrapText="true" />
-=======
-                  <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="100.0" text="Agregar a la fila " wrapText="true" />
->>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
                   <VBox alignment="CENTER" prefHeight="105.0" prefWidth="100.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#viewDataBase" text="volver" />

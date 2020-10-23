@@ -5,10 +5,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BankGUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="488.0" layoutY="330.0" mnemonicParsing="false" onAction="#loadMainWindow" text="Volver" />
-      <Button layoutX="145.0" layoutY="237.0" mnemonicParsing="false" text="Rertirar" />
+      <Button layoutX="145.0" layoutY="237.0" mnemonicParsing="false" onAction="#retirarClienteNQCA" text="Rertirar" />
       <TextField fx:id="atendedCc" editable="false" layoutX="187.0" layoutY="84.0" prefHeight="25.0" prefWidth="90.0" />
       <TextField fx:id="atendedName" editable="false" layoutX="83.0" layoutY="84.0" prefHeight="25.0" prefWidth="90.0" />
       <TextField fx:id="atendedDate" editable="false" layoutX="423.0" layoutY="84.0" prefHeight="25.0" prefWidth="90.0" />
@@ -23,12 +23,12 @@
       <TextField fx:id="atendedDCAmount" editable="false" layoutX="360.0" layoutY="149.0" />
       <Label layoutX="65.0" layoutY="121.0" text="Saldo Tarjeta de Credito" />
       <Label layoutX="371.0" layoutY="121.0" text="Saldo Tarjeta de Debito" />
-      <Button layoutX="360.0" layoutY="330.0" mnemonicParsing="false" text="Cancelar al cuenta" />
-      <Button layoutX="439.0" layoutY="237.0" mnemonicParsing="false" text="Depositar" />
+      <Button layoutX="360.0" layoutY="330.0" mnemonicParsing="false" onAction="#cancelAcountNQ" text="Cancelar al cuenta" />
+      <Button layoutX="439.0" layoutY="237.0" mnemonicParsing="false" onAction="#depositarClienteNQ" text="Depositar" />
       <Label layoutX="42.0" layoutY="207.0" text="Retirar de la cuenta de ahorros" />
       <Label layoutX="342.0" layoutY="207.0" text="Depositar en la cuenta de ahorros" />
       <TextField fx:id="atendedDCPaidment" layoutX="54.0" layoutY="318.0" prefHeight="25.0" prefWidth="90.0" />
-      <Button layoutX="145.0" layoutY="318.0" mnemonicParsing="false" text="Pagar" />
+      <Button layoutX="145.0" layoutY="318.0" mnemonicParsing="false" onAction="#pagarClienteNQCA" text="Pagar" />
       <Label layoutX="54.0" layoutY="288.0" text="Pagar tarjeta debito" />
    </children>
 </AnchorPane>

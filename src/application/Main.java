@@ -7,12 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Bank;
 
 
 
 public class Main extends Application {
 	
-<<<<<<< HEAD
 	BankGUIController bankGUI;
 	Bank bank;
 	Scene scene;
@@ -35,16 +35,6 @@ public class Main extends Application {
 			stage.setScene(scene);
 			stage.setTitle("Bank Organizer");
 			bankGUI.viewDataBase(null);
-=======
-	@Override
-	public void start(Stage stage)   {
-		try {	
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("ventanaPrincipal.fxml"));
-			Parent root = loader.load();
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.setTitle("Bank Organizer");
->>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
 			stage.show();
 			stage.sizeToScene();
 		} catch (Exception e) {

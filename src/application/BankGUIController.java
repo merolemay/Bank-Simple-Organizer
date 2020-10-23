@@ -210,7 +210,11 @@ public class BankGUIController implements Initializable {
 	@FXML
 	public void viewDataBase(ActionEvent o) throws Exception {
 
-		
+		loadMainWindow();
+		if(!bank.getBank().isEmpty()) {
+			loadTableDataBase();
+		}
+		refreshMainTable();
 	}
 
 	public void viewRegisterWindow() {
@@ -491,32 +495,22 @@ public class BankGUIController implements Initializable {
 		
 
     }
-
+	
+	/*
     @FXML
     void sortByCc(ActionEvent event) {
     	
-    	bank.heapSortId();
-    	
-    	try {
-			loadMainWindow();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(!bank.getBank().isEmpty()) {
-			loadTableDataBase();
-		}
-		refreshMainTable();
+    	bank.bank.heapSortId();
 
     }
 
     @FXML
     void sortByDate(ActionEvent event) {
     	
-    	bank.mergeSort(bank.getArrayClients(), 0, 
-    			//bank.getArrayClients().length());
+    	bank.mergeSort(bank.getArrayClients(), 0, bank.getArrayClients().length());
 
     }
+    */
 
     @FXML
     void sortByName(ActionEvent event) {

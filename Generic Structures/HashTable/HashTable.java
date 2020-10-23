@@ -89,15 +89,23 @@ public class HashTable<K, V> implements Map<K,V>  {
 	
 	public ArrayList<V> toArrayList(){
 		ArrayList<V> array = new ArrayList<V>(arraySize);
+
 		for (int i = 0; i < table.length; i++) {
+			
 			   @SuppressWarnings({ "unchecked", "rawtypes" })
 			List<V> aList = new ArrayList(table[i]);
 			   for (int j = 0; j < aList.size(); j++) {
+				  
 				   array.add(aList.get(j));
 			}
 			   
 		}
 		return array;
+	}
+	
+	public boolean isEmpty() {
+		return length==0;
+		
 	}
 }
 

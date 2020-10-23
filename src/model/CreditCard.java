@@ -12,11 +12,11 @@ public class CreditCard {
 	private boolean state;
 	
 	
-	public CreditCard(double balance, Date creationDate, int number, boolean limit) {
+	public CreditCard(double balance, Date creationDate, int number, int limit) {
 		this.balance = balance;
 		this.creationDate = creationDate;
 		this.number = number;
-		this.state = limit;
+		this.limit = limit;
 	}
 	
 	public void payCard() {
