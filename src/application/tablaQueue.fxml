@@ -8,7 +8,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
+<<<<<<< HEAD
+=======
 <?import javafx.scene.layout.HBox?>
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -46,20 +49,32 @@
          <children>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
+<<<<<<< HEAD
+                  <Button mnemonicParsing="false" onAction="#atenderClientNQ" text="Atender Cliente" />
+=======
                   <Button fx:id="registerClient" mnemonicParsing="false" text="Atender Cliente" />
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
               </items>
             </ToolBar>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
+<<<<<<< HEAD
+                <Button mnemonicParsing="false" onAction="#eliminarClientNQ" prefHeight="25.0" prefWidth="108.0" text="Eliminar Cliente " wrapText="true" />
+                  <ToolBar prefHeight="40.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#añadirClienteNQ" text="A�adir Cliente a la cola" wrapText="true" />
+=======
                 <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="117.0" text="Eliminar Cliente " wrapText="true" />
                   <ToolBar prefHeight="40.0" prefWidth="200.0" />
                   <Button mnemonicParsing="false" text="Añadir Cliente a la cola" wrapText="true" />
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
                </children>
             </VBox>
             <Button mnemonicParsing="false" onAction="#viewDataBase" text="Volver" />
          </children>
       </VBox>
    </right>
+<<<<<<< HEAD
+=======
    <bottom>
       <HBox alignment="CENTER" prefHeight="69.0" prefWidth="536.0" BorderPane.alignment="CENTER">
          <children>
@@ -71,4 +86,5 @@
          </children>
       </HBox>
    </bottom>
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
 </BorderPane>

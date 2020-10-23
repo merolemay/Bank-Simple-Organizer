@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import BTS.BTS;
 import HashTable.HashTable;
@@ -33,8 +34,13 @@ public class Bank implements Serializable{
 	private HashTable<Integer,Client> bank;
 	private Queue<Client> clientQueue;
 	private PriorityQueue<Client> prioriQueue;
+<<<<<<< HEAD
+	private int numsCards=100000000;
+	private ArrayList<Client> clients;
+=======
 	private static final int NUMS_CARDS=100000000;
 	
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
 	
 	/** The constructor of the Class bank which starts with a designate administrator
 	 *  which takes control of the .
@@ -44,10 +50,15 @@ public class Bank implements Serializable{
 		bank = new HashTable<Integer,Client>(90);
 		clientQueue = new Queue<Client>();
 		prioriQueue = new PriorityQueue<Client>(12);	
+<<<<<<< HEAD
+		clients = new ArrayList<Client>();
+	
+=======
 		
 		registerClient(new Client("",0,0));
 		clientQueue.enqueue(new Client("",0,0));
 		prioriQueue.add(new Client("",0,0), 0);
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
 	}
 	
 	
@@ -75,6 +86,37 @@ public class Bank implements Serializable{
 	/** Registers a Client in the bank data base (HashTable).
 	 * @param c : the client that is going to be inserted.
 	 */
+<<<<<<< HEAD
+	
+	public void registerClient(String name, int cc,double amount) {
+		Date date = new Date(System.currentTimeMillis());
+		int cardNumber = (int) (Math.random() *9999999+ 1000000);
+		cardNumber += numsCards;
+		numsCards++;
+		DebitCard debitCard = new DebitCard(amount,date,cardNumber,false);
+		Client c = new Client(name, cc,amount,debitCard);
+		clients.add(c);
+		bank.put(c.getCc(), c);
+		
+	}
+	
+	public void registerClient(String name, int cc,double amount,double balance,int limit) {
+		Date date = new Date(System.currentTimeMillis());
+		int cardNumber = (int) (Math.random() *9999999+ 1000000);
+		cardNumber += numsCards;
+		numsCards++;
+		CreditCard creditCard = new CreditCard(balance,date,numsCards,limit);
+		DebitCard debitCard = new DebitCard(amount,date,cardNumber,false);
+		Client c = new Client(name, cc,amount,creditCard,debitCard);
+		clients.add(c);
+		bank.put(c.getCc(), c);
+		
+	}
+	
+	
+	
+	
+=======
 	public void registerClient(Client test) {
 		bank.put(test.getCc(), test);
 	}
@@ -82,6 +124,7 @@ public class Bank implements Serializable{
 	
 	
 	
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
 	public void addClientToQueue(Client c) {	
 		if(clientQueue.size() < 12) {
 		clientQueue.enqueue(c);
@@ -97,6 +140,7 @@ public class Bank implements Serializable{
 	 * @return Client if it was found or an exception if the client doesn't exist
 	 */
 	public Client searchClient(Integer cc) {	
+		
 		return bank.get(cc);
 	}
 	
@@ -149,10 +193,13 @@ public class Bank implements Serializable{
 		return	(Client[]) bank.toArrayList().toArray();
 	}
 	
+<<<<<<< HEAD
+=======
 	public ArrayList<Client> getArrayListClients(){
 		return bank.toArrayList();
 	}
 		
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
 	
 	public  Client[] selectionSortName() {
 		
@@ -287,4 +334,11 @@ public class Bank implements Serializable{
 			return arrClient;
 	}	
 	
+<<<<<<< HEAD
+	public ArrayList<Client> getArrayListClients(){
+		return clients;
+	}
+
+=======
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
 }

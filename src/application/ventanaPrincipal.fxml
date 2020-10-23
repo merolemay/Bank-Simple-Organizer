@@ -11,7 +11,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<<<<<<< HEAD
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+=======
 <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BankGUIController">
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
    <center>
       <TableView fx:id="tablaBaseDeDatos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
@@ -46,15 +50,26 @@
          <children>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
+<<<<<<< HEAD
+                  <Button fx:id="registerClient" mnemonicParsing="false" onAction="#viewRegisterWindow" text="Registrar cliente" />
+=======
                   <Button fx:id="registerClient" mnemonicParsing="false" onAction="#viewRegisterWindow" text="Registrar Cliente" />
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
               </items>
             </ToolBar>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
+<<<<<<< HEAD
+                <Button mnemonicParsing="false" onAction="#registryTurnPrincipalWindow" prefHeight="25.0" prefWidth="117.0" text="Registrar turno" wrapText="true" />
+                  <ToolBar prefHeight="40.0" prefWidth="200.0" />
+                  <Button fx:id="queBotton" mnemonicParsing="false" onAction="#viewQueue" text="Cola de espera" wrapText="true" />
+                  <Button fx:id="pqBotton" mnemonicParsing="false" onAction="#viewPriorityQueue" text="Cola de prioridad" />
+=======
                 <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Eliminar Cliente" wrapText="true" />
                   <ToolBar prefHeight="40.0" prefWidth="200.0" />
                   <Button mnemonicParsing="false" onAction="#viewQueue" text="Cola de Espera" wrapText="true" />
                   <Button mnemonicParsing="false" onAction="#viewPriorityQueue" text="Cola de Prioridad" />
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
                </children>
             </VBox>
          </children>
@@ -63,11 +78,19 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="69.0" prefWidth="536.0" BorderPane.alignment="CENTER">
          <children>
+<<<<<<< HEAD
+            <Button mnemonicParsing="false" onAction="#sortByName" text="Nombre" />
+            <Button mnemonicParsing="false" onAction="#sortByCc" text="Cedula" />
+            <Button mnemonicParsing="false" onAction="#sortByAmount" text="Saldo" />
+            <Button mnemonicParsing="false" onAction="#sortByDate" text="Fecha de vinculacion" />
+            <Button fx:id="sortByTransaction" mnemonicParsing="false" onAction="#refreshMainTable" text="Refrescar Tabla" />
+=======
             <Button fx:id="sortByName" mnemonicParsing="false" text="Nombre" />
             <Button fx:id="sortByCc" mnemonicParsing="false" text="Cedula" />
             <Button fx:id="sortByAmount" mnemonicParsing="false" text="Saldo" />
             <Button fx:id="sortByDate" mnemonicParsing="false" text="Fecha de vinculacion" />
             <Button fx:id="sortByTransaction" mnemonicParsing="false" text="Ultima Transacion" />
+>>>>>>> 9c401206f14677b390af3854e3bbfd4c4c6b5ebf
          </children>
       </HBox>
    </bottom>
