@@ -123,7 +123,7 @@ public class BankGUIController implements Initializable {
 	@SuppressWarnings("unchecked")
 	private void loadTableDataBase() {
 
-		ObservableList<Client> data = FXCollections.observableArrayList(bank.getArrayListClients());
+		ObservableList<Client> data = FXCollections.observableArrayList(bank.getArrayClients());
 
 		TableColumn<Client, String> nameCol = new TableColumn<Client, String>("Nombre");
 		nameCol.setCellValueFactory(new PropertyValueFactory<Client, String>("name"));
@@ -199,7 +199,7 @@ public class BankGUIController implements Initializable {
 
 		tablaPrioridad.setItems(data);
 		tablaPrioridad.getColumns().clear();
-		tablaPrioridad.getColumns().addAll(nameCol,ccCol ,amountCol ,dateCol,dateCol);
+		tablaPrioridad.getColumns().addAll(nameCol,ccCol ,amountCol,dateCol);
 	}
 
 	@Override
@@ -303,7 +303,16 @@ public class BankGUIController implements Initializable {
 
 	public void viewPriorityQueue() {
 		loadPriorityQueueWindow();
+		if(!bank.getBank().isEmpty()) {
+			loadTablePriorityQueue();
+		}
+		refreshPriorityQueueTable();
 
+	}
+	
+	@FXML
+	void atenderClientPQ() {
+		
 	}
 
 	@FXML
@@ -334,42 +343,65 @@ public class BankGUIController implements Initializable {
 	private TextField atendedDCPaidment;
 	@FXML
 	void atenderClientNQ(ActionEvent Event) {
+		
+		
+		if(!bank.getClientQueue().isEmpty()) {
+		
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("atenderCliente.fxml"));
+		fxmlLoader.setController(this);
+		Parent registry = null;
+		try {
+			registry = fxmlLoader.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mainPane.getChildren().clear();
+		mainPane.setCenter(registry);
+		
+		
+	
 
 		Client c = bank.getClientQueue().dequeue();
 		atendedName.setText(c.getName());
 		atendedCc.setText(""+c.getCc());
-		atendedAmount.setText(""+c.getAmount());
 		atendedTCAmount.setText(""+c.getCrediCard().getBalance());
 		atendedDCAmount.setText(""+c.getDebitCard().getAmount());
+		}
 
 	}
-	
+
 	@FXML
 	void depositarClienteNQ(ActionEvent event) {
 		bank.searchClient(Integer.parseInt(atendedCc.getText())).setAmount(Integer.parseInt(atendedAmount.getText())
 				+Integer.parseInt(atendedDepositInAmount.getText()));
 	}
-	
+
 	@FXML
 	void retirarClienteNQCA(ActionEvent event) {
 		bank.searchClient(Integer.parseInt(atendedCc.getText())).getDebitCard().setAmount(Integer.parseInt(atendedDCAmount.getText())
 				-Integer.parseInt(atendedDCPaidment.getText()));
 	}
-	
+
 	@FXML
 	void pagarClienteNQCA(ActionEvent event) {
 		bank.searchClient(Integer.parseInt(atendedCc.getText())).setAmount(Integer.parseInt(atendedAmount.getText())
 				+Integer.parseInt(atendedWithdrawAmount.getText()));
 	}
-	
+
 	@FXML
 	void cancelAcountNQ(ActionEvent event) {
 		bank.cancelAcount(Integer.parseInt(atendedCc.getText()));
 	}
-	
-	
+
+
 	@FXML
 	void añadirClienteNQ(ActionEvent event) {
+		
+			
+			
+		
 
 	}
 
@@ -379,11 +411,16 @@ public class BankGUIController implements Initializable {
 	}
 	public void viewQueue() {	
 		loadQueueWindow();
+		if(!bank.getBank().isEmpty()) {
+			loadTableQueue();
+		}
+		refreshQueueTable();
+		
 	}
 
 	public void refreshMainTable() {
 		tablaBaseDeDatos.getItems().clear();
-		ObservableList<Client> data = FXCollections.observableArrayList(bank.getArrayListClients());
+		ObservableList<Client> data = FXCollections.observableArrayList(bank.getArrayClients());
 		tablaBaseDeDatos.setItems(data);
 	}
 
@@ -397,7 +434,7 @@ public class BankGUIController implements Initializable {
 		ObservableList<Client> data = FXCollections.observableArrayList(bank.getClientQueue().toArrayList());
 		tablaCola.setItems(data);
 	}
-	
+
 	@FXML
 	private ToggleGroup usuario;
 
@@ -430,23 +467,27 @@ public class BankGUIController implements Initializable {
 					}else {
 						bank.addClientToQueue(bank.searchClient(cc));
 					}
-					
+
 					Alert alert = new Alert(AlertType.CONFIRMATION);
 					alert.setTitle("Turno registrado satisfactoriamente");
 					alert.setContentText(":D");
 					alert.showAndWait();
-					
+					idToSearch.clear();
+
 				}else {
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Numero de cedula no registrado en el sistema");
 					alert.setContentText("Por favor registrarse en el boton registrar.");
 					alert.showAndWait();
+					
 				}
 			}else {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Campos llenados de forma incorrecta");
 				alert.setContentText("Por favor llenar los campos requeridos.");
 				alert.showAndWait();
+				
+				
 			}
 		}catch (NumberFormatException nE) {
 
@@ -455,6 +496,11 @@ public class BankGUIController implements Initializable {
 			alert.setContentText("Los campos pueden estar vacios o con valores no correspondientes.");
 			alert.showAndWait();
 		}
+	}
+	
+	@FXML
+	void addToQueuePQ(ActionEvent event) {
+		
 	}
 
 	@FXML
@@ -488,34 +534,81 @@ public class BankGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
-    void sortByAmount(ActionEvent event) {
-		
-		
+	void sortByAmount(ActionEvent event) {
+		bank.setArrayList(bank.bstSort().toArray(new Client[bank.bstSort().size()]));
 
-    }
-	
-	/*
-    @FXML
-    void sortByCc(ActionEvent event) {
-    	
-    	bank.bank.heapSortId();
+		try {
+			loadMainWindow();
+			if(!bank.getBank().isEmpty()) {
+				loadTableDataBase();
+			}
+			refreshMainTable();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    }
 
-    @FXML
-    void sortByDate(ActionEvent event) {
-    	
-    	bank.mergeSort(bank.getArrayClients(), 0, bank.getArrayClients().length());
 
-    }
-    */
+	}
 
-    @FXML
-    void sortByName(ActionEvent event) {
 
-    }
+	@FXML
+	void sortByCc(ActionEvent event) {
+
+		bank.setArrayList(bank.heapSortId());
+
+		try {
+			loadMainWindow();
+			if(!bank.getBank().isEmpty()) {
+				loadTableDataBase();
+			}
+			refreshMainTable();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@FXML
+	void sortByDate(ActionEvent event) {
+
+		bank.setArrayList(bank.mergeSortMethod());
+
+		try {
+			loadMainWindow();
+			if(!bank.getBank().isEmpty()) {
+				loadTableDataBase();
+			}
+			refreshMainTable();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+
+	@FXML
+	void sortByName(ActionEvent event) {
+
+		bank.setArrayList(bank.selectionSortName());;
+
+		try {
+			loadMainWindow();
+			if(!bank.getBank().isEmpty()) {
+				loadTableDataBase();
+			}
+			refreshMainTable();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 
 

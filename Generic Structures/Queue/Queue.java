@@ -86,8 +86,8 @@ public class Queue<E> implements Serializable {
 		Queue<E> q = this;
 		for (int i = 0; i < queueSize; i++) {
 			vojabes.add(q.dequeue());
+			
 		}
-		
 		return vojabes;
 	}
 }

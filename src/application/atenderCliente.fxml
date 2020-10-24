@@ -5,23 +5,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="488.0" layoutY="330.0" mnemonicParsing="false" onAction="#loadMainWindow" text="Volver" />
-      <Button layoutX="145.0" layoutY="237.0" mnemonicParsing="false" onAction="#retirarClienteNQCA" text="Rertirar" />
+      <Button layoutX="145.0" layoutY="237.0" mnemonicParsing="false" onAction="#retirarClienteNQCA" text="Retirar" />
       <TextField fx:id="atendedCc" editable="false" layoutX="187.0" layoutY="84.0" prefHeight="25.0" prefWidth="90.0" />
       <TextField fx:id="atendedName" editable="false" layoutX="83.0" layoutY="84.0" prefHeight="25.0" prefWidth="90.0" />
       <TextField fx:id="atendedDate" editable="false" layoutX="423.0" layoutY="84.0" prefHeight="25.0" prefWidth="90.0" />
-      <TextField fx:id="atendedAmount" editable="false" layoutX="300.0" layoutY="84.0" prefHeight="25.0" prefWidth="90.0" />
       <Label layoutX="106.0" layoutY="59.0" text="Nombre" />
       <Label layoutX="184.0" layoutY="59.0" text="Cedula Ciudadana" />
-      <Label layoutX="330.0" layoutY="59.0" text="Saldo" />
       <Label layoutX="422.0" layoutY="59.0" text="Fecha de registro" />
       <TextField fx:id="atendedTCAmount" editable="false" layoutX="54.0" layoutY="149.0" />
       <TextField fx:id="atendedWithdrawAmount" layoutX="54.0" layoutY="237.0" prefHeight="25.0" prefWidth="90.0" />
       <TextField fx:id="atendedDepositInAmount" layoutX="349.0" layoutY="237.0" prefHeight="25.0" prefWidth="90.0" />
       <TextField fx:id="atendedDCAmount" editable="false" layoutX="360.0" layoutY="149.0" />
-      <Label layoutX="65.0" layoutY="121.0" text="Saldo Tarjeta de Credito" />
+      <Label layoutX="65.0" layoutY="121.0" text="Deuda Tarjeta de Credito" />
       <Label layoutX="371.0" layoutY="121.0" text="Saldo Tarjeta de Debito" />
       <Button layoutX="360.0" layoutY="330.0" mnemonicParsing="false" onAction="#cancelAcountNQ" text="Cancelar al cuenta" />
       <Button layoutX="439.0" layoutY="237.0" mnemonicParsing="false" onAction="#depositarClienteNQ" text="Depositar" />

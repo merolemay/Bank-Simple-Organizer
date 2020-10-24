@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import BTS.BTS;
+import BTS.BST;
 import HashTable.HashTable;
 import Queue.Queue;
 import priorityQueue.PriorityQueue;
@@ -167,14 +167,12 @@ public class Bank implements Serializable{
 		return prioriQueue.toArrayList();
 	}
 	
-	public Client[] getArrayClients() {
-		return	(Client[]) bank.toArrayList().toArray();
-	}
+	
 	
 	
 	public  Client[] selectionSortName() {
 		
-		Client[] list = getArrayClients();
+		Client[] list = convertArray();
 		
 		 for(int i=0; i<list.length -1; i++) {
 			 
@@ -197,7 +195,7 @@ public class Bank implements Serializable{
 	}
 	
 	public Client[] heapSortId() {
-		Client[] c = getArrayClients();
+		Client[] c = convertArray();
 		HeapSort h;
 		h = new HeapSort();
 		return h.sort(c);
@@ -205,7 +203,7 @@ public class Bank implements Serializable{
 	
 	
 	public Client[] mergeSortMethod() {
-		Client[] c = getArrayClients();
+		Client[] c = convertArray();
 		mergeSort(c,0,c.length);
 		return c;
 	}
@@ -278,17 +276,15 @@ public class Bank implements Serializable{
 	
 	public ArrayList<Client> bstSort() {
 		
-		Client[] list = getArrayClients();
+		Client[] list = convertArray();
 		
-		BTS<Client> tree = new BTS<>();
+		BST<Client,Double> tree = new BST<>();
 		for(int i=0;i<list.length;i++) {
-			tree.addNode(list[i]);
+			tree.add(list[i],list[i].getAmount());
 		}
 		
-		tree.traverseInOrder(tree.getRoot());
-		
-		ArrayList<Client> listA= new ArrayList<Client>(Arrays.asList(list));
-		return listA;
+		return tree.toArrayList();
+	
 	}
 	
 	public ArrayList<Client> getArrayListClientQueue(){
@@ -305,8 +301,25 @@ public class Bank implements Serializable{
 			return arrClient;
 	}	
 	
-	public ArrayList<Client> getArrayListClients(){
+	public ArrayList<Client> getArrayClients(){
 		return clients;
 	}
-
+	
+	public Client[] convertArray() {
+		Client[] c = new Client[clients.size()];
+		for(int i=0;i<clients.size();i++) {
+			c[i] = clients.get(i);
+		}
+		
+		return c;
+	}
+	
+	public void setArrayList(Client[] c) {
+		ArrayList<Client> a = new ArrayList<>();
+ 		for(int i=0;i<c.length;i++) {
+			a.add(c[i]);
+		}
+ 		
+ 		clients = a;
+	}
 }

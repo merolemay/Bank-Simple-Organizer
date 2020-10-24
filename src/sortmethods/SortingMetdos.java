@@ -1,6 +1,6 @@
 package sortmethods;
 
-import BTS.*;
+import BTS.BST;
 
 public  class SortingMetdos  {
 
@@ -90,13 +90,13 @@ public  class SortingMetdos  {
 		}
 	}
   
-	
-	public static <E extends Comparable<E>> void Tree(E[] list) {
-		BTS<E> tree = new BTS<E>();
+	/*
+	public static <E,K extends Comparable<K>> void Tree(E[] list) {
+		BST<E,K> tree = new BST<E,K>();
 		for(int i=0;i<list.length;i++) {
-			tree.addNode(list[i]);
+			tree.add(list[i],list
 		}
 	}
-	
+	*/
 	
 }

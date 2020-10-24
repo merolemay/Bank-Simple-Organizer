@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TableView fx:id="tablaCola" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
@@ -52,7 +52,7 @@
                <children>
                 <Button mnemonicParsing="false" onAction="#eliminarClientNQ" prefHeight="25.0" prefWidth="108.0" text="Eliminar Cliente " wrapText="true" />
                   <ToolBar prefHeight="40.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" onAction="#añadirClienteNQ" text="A�adir Cliente a la cola" wrapText="true" />
+                  <Button mnemonicParsing="false" onAction="#añadirClienteNQ" text="Agregar cliente a la cola" wrapText="true" />
                </children>
             </VBox>
             <Button mnemonicParsing="false" onAction="#viewDataBase" text="Volver" />
