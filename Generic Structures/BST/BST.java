@@ -1,26 +1,42 @@
-package BTS;
-import java.io.Serializable;
+package BST;
 import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class BTS<T extends Comparable<? super T>> implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Node<T> root;
+public class BST<E,K extends Comparable<? super K>>{
+
+	private Node<E,K> root;
 	
 	
 	
+	public E search(K key) {
+		if(root.getKey().equals(key)) {
+			return root.getElement();
+		} else {
+			return searchRecursive(root,key);
+		}
+			
+	}
+	
+	private E searchRecursive(Node<E,K> current,K key) {
+	
+	    if (key == current.getKey()) {
+	    	return current.getElement();
+	    } 
+	    if ((Integer)key < (Integer)current.getKey() && current.nodeLeft!=null) {
+	        return searchRecursive(current.nodeLeft,key);
+	    }else {
+	    	return searchRecursive(current.nodeRight,key);
+	    }
+		
+	}
 	/**
 	 *  Adds a new Node to the BTS using recursive insertion  bases on his value.
 	 *  <pre> The value most not be repeated </pre>
 	 * @param value : Is the value of the node.
 	 */
-	public void addNode(T value) {
-		root=addNodeRecursive(root, value);
+	public void add(Node<E,K> current) {
+		root=addNodeRecursive(root,current.getElement(), current.getKey());
 	}
 	
 	
@@ -30,18 +46,18 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	 * @param value : The value of the node that is going to be added.
 	 * @return : The recursive return.
 	 */
-	private Node<T> addNodeRecursive(Node<T> current,T value) {	
+	private Node<E,K> addNodeRecursive(Node<E,K> current,E element,K key) {	
 		
 		if(current==null) {
-		return new Node<T> (value);
+		return new Node<E,K> (element,key);
 		} 
 		
-		if(value.compareTo(current.getValue())>0) {
-			current.nodeLeft = addNodeRecursive(current.nodeLeft,value);
+		if(key.compareTo(current.getKey())>0) {
+			current.nodeLeft = addNodeRecursive(current.nodeLeft,element,key);
 		}
 		
-		else if(value.compareTo(current.getValue())<0) {
-			current.nodeRight = addNodeRecursive(current.nodeRight,value);
+		else if(key.compareTo(current.getKey())<0) {
+			current.nodeRight = addNodeRecursive(current.nodeRight,element,key);
 		} else {
 			//The value exist
 			return current;
@@ -49,8 +65,8 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	
 		return current;
 	}
-	public boolean delete(T value) {
-		if(value.equals(root.getValue())) {
+	public boolean delete(K key) {
+		if(key.equals(root.getKey())) {
 			if(root.nodeLeft==null && root.nodeRight==null) {
 				root=null;
 				return true;
@@ -58,7 +74,7 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 				return false;
 		}
 		else {
-			return (deleteRecursive(root,value).equals(null))?true:false;
+			return (deleteRecursive(root,key).equals(null))?true:false;
 		}
 	}
 	/** Recursive Method for deleting a Node with no children of the BTS.
@@ -66,25 +82,25 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	 * @param value : Value of the Node which is going to be deleted.
 	 * @return : Returns the Node as a null when is deleted o a system out print if the node has children.
 	 */
-	private Node<T> deleteRecursive(Node<T> current,T value) {
+	private Node<E,K> deleteRecursive(Node<E,K> current,K key) {
 		if (current == null) {
 	        return null;
 	    }
 	 
-	    if (value == current.getValue()) {
+	    if (key == current.getKey()) {
 	    	if(current.nodeLeft==null && current.nodeRight==null) {
 	    		current=null;
-	    		deleteRecursive(current, value);
+	    		deleteRecursive(current, key);
 	    	} else {
 	    		System.out.println("This node can't be deleted because has chilndren");
 	    		return null;
 	    	}
 	    } 
-	    if ((Integer)value < (Integer)current.getValue()) {
-	        current.nodeLeft = deleteRecursive(current.nodeLeft, value);
+	    if ((Integer)key < (Integer)current.getKey()) {
+	        current.nodeLeft = deleteRecursive(current.nodeLeft, key);
 	        return current;
 	    }
-	    current.nodeRight = deleteRecursive(current.nodeRight, value);
+	    current.nodeRight = deleteRecursive(current.nodeRight, key);
 	    return current;
 		
 	}
@@ -94,11 +110,11 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	 * @param node : Root of the tree.
 	 * @return : the list of nodes in the tree in  order.
 	 */
-	public String traverseInOrder(Node<T> node) {
+	public String traverseInOrder(Node<E,K> node) {
 		String report="";
 	    if (node != null) {
 	        traverseInOrder(node.nodeLeft);
-	        report +=" " + node.getValue();
+	        report +=" " + node.getElement();
 	        traverseInOrder(node.nodeRight);
 	    }
 	    
@@ -109,10 +125,10 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	 * @param node : Root of the tree.
 	 * @return : the list of nodes in the tree in pre-order.
 	 */
-	public String traversePreOrder(Node<T> node) {
+	public String traversePreOrder(Node<E,K> node) {
 		String report="";
 	    if (node != null) {
-	    	report +=" " + node.getValue();
+	    	report +=" " + node.getElement();
 	        traverseInOrder(node.nodeLeft);
 	        traverseInOrder(node.nodeRight);
 	    }  
@@ -123,12 +139,12 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	 * @param node : Root of the tree.
 	 * @return : the list of nodes in the tree in Post-order.
 	 */
-	public String traversePostOrder(Node<T> node) {
+	public String traversePostOrder(Node<E,K> node) {
 		String report="";
 	    if (node != null) {
 	        traverseInOrder(node.nodeLeft);
 	        traverseInOrder(node.nodeRight);
-	        report +=" " + node.getValue();
+	        report +=" " + node.getElement();
 	    }
 	    
 	    return report;
@@ -143,14 +159,14 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	        return "";
 	    }
 	 
-	    Queue<Node<T>> nodes = new LinkedList<>();
+	    Queue<Node<E,K>> nodes = new LinkedList<>();
 	    nodes.add(root);
 	 
 	    while (!nodes.isEmpty()) {
 	 
-	        Node<T> node = nodes.remove();
+	    	Node<E,K> node = nodes.remove();
 	 
-	        report += " " + node.getValue();
+	        report += " " + node.getElement();
 	 
 	        if (node.nodeLeft != null) {
 	            nodes.add(node.nodeLeft);
@@ -163,7 +179,7 @@ public class BTS<T extends Comparable<? super T>> implements Serializable{
 	    return report;
 	}
 	
-	public Node<T> getRoot() {
+	public Node<E,K> getRoot() {
 		return root;
 	}
 }
