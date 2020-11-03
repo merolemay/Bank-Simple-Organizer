@@ -8,6 +8,17 @@ public class BST<E,K extends Comparable<? super K>>{
 	private Node<E,K> root;
 	
 	
+	public BST() {		
+	}
+	
+	public BST(Node<E,K> current) {
+		root=current;
+	}
+	
+	public BST(E element, K key) {
+		root = new Node<E,K>(element,key);
+	}
+	
 	
 	public E search(K key) {
 		if(root.getKey().equals(key)) {
@@ -23,10 +34,10 @@ public class BST<E,K extends Comparable<? super K>>{
 	    if (key == current.getKey()) {
 	    	return current.getElement();
 	    } 
-	    if ((Integer)key < (Integer)current.getKey() && current.nodeLeft!=null) {
-	        return searchRecursive(current.nodeLeft,key);
+	    if ((Integer)key < (Integer)current.getKey()) {
+	        return searchRecursive(current.getNodeLeft(),key);
 	    }else {
-	    	return searchRecursive(current.nodeRight,key);
+	    	return searchRecursive(current.getNodeRight(),key);
 	    }
 		
 	}
@@ -35,8 +46,8 @@ public class BST<E,K extends Comparable<? super K>>{
 	 *  <pre> The value most not be repeated </pre>
 	 * @param value : Is the value of the node.
 	 */
-	public void add(Node<E,K> current) {
-		root=addNodeRecursive(root,current.getElement(), current.getKey());
+	public void add(E element, K key) {
+		root=addNodeRecursive(root,element, key);
 	}
 	
 	
@@ -52,30 +63,18 @@ public class BST<E,K extends Comparable<? super K>>{
 		return new Node<E,K> (element,key);
 		} 
 		
-		if(key.compareTo(current.getKey())>0) {
-			current.nodeLeft = addNodeRecursive(current.nodeLeft,element,key);
+		if(key.compareTo(current.getKey())<0) {
+			current.setLeft(addNodeRecursive(current.getNodeLeft(),element,key));
 		}
 		
-		else if(key.compareTo(current.getKey())<0) {
-			current.nodeRight = addNodeRecursive(current.nodeRight,element,key);
-		} else {
-			//The value exist
-			return current;
-		}
+		else {
+			current.setRight(addNodeRecursive(current.getNodeRight(),element,key));
+		} 
 	
 		return current;
 	}
-	public boolean delete(K key) {
-		if(key.equals(root.getKey())) {
-			if(root.nodeLeft==null && root.nodeRight==null) {
-				root=null;
-				return true;
-			} else
-				return false;
-		}
-		else {
-			return (deleteRecursive(root,key).equals(null))?true:false;
-		}
+	public void delete(K key) {
+			root = deleteRecursive(root, key);
 	}
 	/** Recursive Method for deleting a Node with no children of the BTS.
 	 * @param current : Current position in the tree.
@@ -86,21 +85,16 @@ public class BST<E,K extends Comparable<? super K>>{
 		if (current == null) {
 	        return null;
 	    }
-	 
 	    if (key == current.getKey()) {
-	    	if(current.nodeLeft==null && current.nodeRight==null) {
+	    	if(current.getNodeLeft()==null && current.getNodeRight()==null) {
 	    		current=null;
-	    		deleteRecursive(current, key);
-	    	} else {
-	    		System.out.println("This node can't be deleted because has chilndren");
-	    		return null;
-	    	}
+	    	} 
 	    } 
 	    if ((Integer)key < (Integer)current.getKey()) {
-	        current.nodeLeft = deleteRecursive(current.nodeLeft, key);
+	        current.setLeft(deleteRecursive(current.getNodeLeft(), key));
 	        return current;
 	    }
-	    current.nodeRight = deleteRecursive(current.nodeRight, key);
+	    current.setRight(deleteRecursive(current.getNodeRight(), key));
 	    return current;
 		
 	}
@@ -113,9 +107,9 @@ public class BST<E,K extends Comparable<? super K>>{
 	public String traverseInOrder(Node<E,K> node) {
 		String report="";
 	    if (node != null) {
-	        traverseInOrder(node.nodeLeft);
+	        traverseInOrder(node.getNodeLeft());
 	        report +=" " + node.getElement();
-	        traverseInOrder(node.nodeRight);
+	        traverseInOrder(node.getNodeRight());
 	    }
 	    
 	    return report;
@@ -129,8 +123,8 @@ public class BST<E,K extends Comparable<? super K>>{
 		String report="";
 	    if (node != null) {
 	    	report +=" " + node.getElement();
-	        traverseInOrder(node.nodeLeft);
-	        traverseInOrder(node.nodeRight);
+	        traverseInOrder(node.getNodeLeft());
+	        traverseInOrder(node.getNodeRight());
 	    }  
 	    return report;
 	}
@@ -142,8 +136,8 @@ public class BST<E,K extends Comparable<? super K>>{
 	public String traversePostOrder(Node<E,K> node) {
 		String report="";
 	    if (node != null) {
-	        traverseInOrder(node.nodeLeft);
-	        traverseInOrder(node.nodeRight);
+	        traverseInOrder(node.getNodeLeft());
+	        traverseInOrder(node.getNodeRight());
 	        report +=" " + node.getElement();
 	    }
 	    
@@ -168,12 +162,12 @@ public class BST<E,K extends Comparable<? super K>>{
 	 
 	        report += " " + node.getElement();
 	 
-	        if (node.nodeLeft != null) {
-	            nodes.add(node.nodeLeft);
+	        if (node.getNodeLeft() != null) {
+	            nodes.add(node.getNodeLeft());
 	        }
 	 
-	        if (node.nodeRight != null) {
-	            nodes.add(node.nodeRight);
+	        if (node.getNodeRight() != null) {
+	            nodes.add(node.getNodeRight());
 	        }
 	    }
 	    return report;
@@ -182,5 +176,7 @@ public class BST<E,K extends Comparable<? super K>>{
 	public Node<E,K> getRoot() {
 		return root;
 	}
+
+
 }
 
